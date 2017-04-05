@@ -1,5 +1,5 @@
 Analysis & Synthesis report for MIPS_VHDL
-Tue Apr  4 22:52:30 2017
+Wed Apr  5 10:01:39 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -43,7 +43,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Apr  4 22:52:30 2017       ;
+; Analysis & Synthesis Status        ; Successful - Wed Apr  5 10:01:38 2017       ;
 ; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
 ; Revision Name                      ; MIPS_VHDL                                   ;
 ; Top-level Entity Name              ; mips_vhdl                                   ;
@@ -52,7 +52,7 @@ agreement for further details.
 ;     Total combinational functions  ; 0                                           ;
 ;     Dedicated logic registers      ; 0                                           ;
 ; Total registers                    ; 0                                           ;
-; Total pins                         ; 2                                           ;
+; Total pins                         ; 64                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -153,49 +153,50 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 4      ;
+; Number detected on machine ; 2      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                    ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path             ; Library ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
-; MIPS_VHDL.vhd                    ; yes             ; User VHDL File  ; /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd ;         ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                         ; Library ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
+; MIPS_VHDL.vhd                    ; yes             ; User VHDL File  ; /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd       ;         ;
+; comp_desloc2esq.vhd              ; yes             ; User VHDL File  ; /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd ;         ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-;                                             ;       ;
-; Total combinational functions               ; 0     ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 0     ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 0     ;
-;     -- arithmetic mode                      ; 0     ;
-;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 2     ;
-;                                             ;       ;
-; Embedded Multiplier 9-bit elements          ; 0     ;
-;                                             ;       ;
-; Maximum fan-out node                        ; in0   ;
-; Maximum fan-out                             ; 1     ;
-; Total fan-out                               ; 2     ;
-; Average fan-out                             ; 0.50  ;
-+---------------------------------------------+-------+
++-----------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                     ;
++---------------------------------------------+-------------------+
+; Resource                                    ; Usage             ;
++---------------------------------------------+-------------------+
+;                                             ;                   ;
+; Total combinational functions               ; 0                 ;
+; Logic element usage by number of LUT inputs ;                   ;
+;     -- 4 input functions                    ; 0                 ;
+;     -- 3 input functions                    ; 0                 ;
+;     -- <=2 input functions                  ; 0                 ;
+;                                             ;                   ;
+; Logic elements by mode                      ;                   ;
+;     -- normal mode                          ; 0                 ;
+;     -- arithmetic mode                      ; 0                 ;
+;                                             ;                   ;
+; Total registers                             ; 0                 ;
+;     -- Dedicated logic registers            ; 0                 ;
+;     -- I/O registers                        ; 0                 ;
+;                                             ;                   ;
+; I/O pins                                    ; 64                ;
+;                                             ;                   ;
+; Embedded Multiplier 9-bit elements          ; 0                 ;
+;                                             ;                   ;
+; Maximum fan-out node                        ; entrada[29]~input ;
+; Maximum fan-out                             ; 2                 ;
+; Total fan-out                               ; 94                ;
+; Average fan-out                             ; 0.73              ;
++---------------------------------------------+-------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -203,7 +204,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |mips_vhdl                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 2    ; 0            ; |mips_vhdl          ; work         ;
+; |mips_vhdl                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 64   ; 0            ; |mips_vhdl          ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -228,7 +229,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 2                           ;
+; boundary_port         ; 64                          ;
 ; cycloneiii_lcell_comb ; 1                           ;
 ;     normal            ; 1                           ;
 ;         0 data inputs ; 1                           ;
@@ -243,7 +244,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -253,60 +254,66 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Tue Apr  4 22:52:10 2017
+    Info: Processing started: Wed Apr  5 10:01:27 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MIPS_VHDL -c MIPS_VHDL
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file comp_mem_instrucoes.vhd
-    Info (12022): Found design unit 1: comp_mem_instrucoes-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 14
-    Info (12023): Found entity 1: comp_mem_instrucoes File: /home/breno/gitH/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 4
+    Info (12022): Found design unit 1: comp_mem_instrucoes-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 14
+    Info (12023): Found entity 1: comp_mem_instrucoes File: /home/breno/Documentos/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_regP1_IF_ID.vhd
-    Info (12022): Found design unit 1: comp_regP1_IF_ID-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 15
-    Info (12023): Found entity 1: comp_regP1_IF_ID File: /home/breno/gitH/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 4
+    Info (12022): Found design unit 1: comp_regP1_IF_ID-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 15
+    Info (12023): Found entity 1: comp_regP1_IF_ID File: /home/breno/Documentos/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_registradores.vhd
-    Info (12022): Found design unit 1: comp_registradores-behavior File: /home/breno/gitH/MIPS_VHDL/comp_registradores.vhd Line: 19
-    Info (12023): Found entity 1: comp_registradores File: /home/breno/gitH/MIPS_VHDL/comp_registradores.vhd Line: 4
+    Info (12022): Found design unit 1: comp_registradores-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_registradores.vhd Line: 19
+    Info (12023): Found entity 1: comp_registradores File: /home/breno/Documentos/MIPS_VHDL/comp_registradores.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_PC.vhd
-    Info (12022): Found design unit 1: comp_PC-arc File: /home/breno/gitH/MIPS_VHDL/comp_PC.vhd Line: 12
-    Info (12023): Found entity 1: comp_PC File: /home/breno/gitH/MIPS_VHDL/comp_PC.vhd Line: 4
+    Info (12022): Found design unit 1: comp_PC-arc File: /home/breno/Documentos/MIPS_VHDL/comp_PC.vhd Line: 12
+    Info (12023): Found entity 1: comp_PC File: /home/breno/Documentos/MIPS_VHDL/comp_PC.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_regP4_MEM_WB.vhd
-    Info (12022): Found design unit 1: comp_regP4_MEM_WB-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 30
-    Info (12023): Found entity 1: comp_regP4_MEM_WB File: /home/breno/gitH/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 4
+    Info (12022): Found design unit 1: comp_regP4_MEM_WB-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 30
+    Info (12023): Found entity 1: comp_regP4_MEM_WB File: /home/breno/Documentos/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_regP3_EX_MEM.vhd
-    Info (12022): Found design unit 1: comp_regP3_EX_MEM-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 44
-    Info (12023): Found entity 1: comp_regP3_EX_MEM File: /home/breno/gitH/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 4
+    Info (12022): Found design unit 1: comp_regP3_EX_MEM-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 44
+    Info (12023): Found entity 1: comp_regP3_EX_MEM File: /home/breno/Documentos/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_regP2_ID_EX.vhd
-    Info (12022): Found design unit 1: comp_regP2_ID_EX-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 49
-    Info (12023): Found entity 1: comp_regP2_ID_EX File: /home/breno/gitH/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 4
+    Info (12022): Found design unit 1: comp_regP2_ID_EX-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 49
+    Info (12023): Found entity 1: comp_regP2_ID_EX File: /home/breno/Documentos/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_somador32.vhd
-    Info (12022): Found design unit 1: comp_somador32-arc File: /home/breno/gitH/MIPS_VHDL/comp_somador32.vhd Line: 14
-    Info (12023): Found entity 1: comp_somador32 File: /home/breno/gitH/MIPS_VHDL/comp_somador32.vhd Line: 6
+    Info (12022): Found design unit 1: comp_somador32-arc File: /home/breno/Documentos/MIPS_VHDL/comp_somador32.vhd Line: 14
+    Info (12023): Found entity 1: comp_somador32 File: /home/breno/Documentos/MIPS_VHDL/comp_somador32.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file comp_somadorPC.vhd
-    Info (12022): Found design unit 1: comp_somadorPC-arc File: /home/breno/gitH/MIPS_VHDL/comp_somadorPC.vhd Line: 13
-    Info (12023): Found entity 1: comp_somadorPC File: /home/breno/gitH/MIPS_VHDL/comp_somadorPC.vhd Line: 6
+    Info (12022): Found design unit 1: comp_somadorPC-arc File: /home/breno/Documentos/MIPS_VHDL/comp_somadorPC.vhd Line: 13
+    Info (12023): Found entity 1: comp_somadorPC File: /home/breno/Documentos/MIPS_VHDL/comp_somadorPC.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file comp_mux2.vhd
-    Info (12022): Found design unit 1: comp_mux2-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux2.vhd Line: 15
-    Info (12023): Found entity 1: comp_mux2 File: /home/breno/gitH/MIPS_VHDL/comp_mux2.vhd Line: 4
+    Info (12022): Found design unit 1: comp_mux2-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mux2.vhd Line: 15
+    Info (12023): Found entity 1: comp_mux2 File: /home/breno/Documentos/MIPS_VHDL/comp_mux2.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_mux4.vhd
-    Info (12022): Found design unit 1: comp_mux4-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux4.vhd Line: 17
-    Info (12023): Found entity 1: comp_mux4 File: /home/breno/gitH/MIPS_VHDL/comp_mux4.vhd Line: 4
+    Info (12022): Found design unit 1: comp_mux4-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mux4.vhd Line: 17
+    Info (12023): Found entity 1: comp_mux4 File: /home/breno/Documentos/MIPS_VHDL/comp_mux4.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file MIPS_VHDL.vhd
-    Info (12022): Found design unit 1: mips_vhdl-behavior File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 12
-    Info (12023): Found entity 1: mips_vhdl File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 4
+    Info (12022): Found design unit 1: mips_vhdl-behavior File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 11
+    Info (12023): Found entity 1: mips_vhdl File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_desloc2esq.vhd
+    Info (12022): Found design unit 1: comp_desloc2esc-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd Line: 11
+    Info (12023): Found entity 1: comp_desloc2esc File: /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd Line: 4
 Info (12127): Elaborating entity "MIPS_VHDL" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at MIPS_VHDL.vhd(8): used implicit default value for signal "out0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 8
+Info (12128): Elaborating entity "comp_desloc2esc" for hierarchy "comp_desloc2esc:PM1" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 21
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "out0" is stuck at GND File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 8
+    Warning (13410): Pin "saida[0]" is stuck at GND File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
+    Warning (13410): Pin "saida[1]" is stuck at GND File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "in0" File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
-Info (21057): Implemented 2 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 1 input pins
-    Info (21059): Implemented 1 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 1182 megabytes
-    Info: Processing ended: Tue Apr  4 22:52:30 2017
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:44
+Warning (21074): Design contains 3 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "entrada[19]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+    Warning (15610): No output dependent on input pin "entrada[30]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+    Warning (15610): No output dependent on input pin "entrada[31]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+Info (21057): Implemented 64 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 32 input pins
+    Info (21059): Implemented 32 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 1184 megabytes
+    Info: Processing ended: Wed Apr  5 10:01:39 2017
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:03
 
 

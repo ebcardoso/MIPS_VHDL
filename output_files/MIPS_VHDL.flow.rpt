@@ -1,5 +1,5 @@
 Flow report for MIPS_VHDL
-Tue Apr  4 22:53:20 2017
+Wed Apr  5 10:02:40 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Apr  4 22:53:20 2017       ;
+; Flow Status                        ; Successful - Wed Apr  5 10:02:40 2017       ;
 ; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
 ; Revision Name                      ; MIPS_VHDL                                   ;
 ; Top-level Entity Name              ; mips_vhdl                                   ;
@@ -52,7 +52,7 @@ agreement for further details.
 ;     Total combinational functions  ; 0 / 114,480 ( 0 % )                         ;
 ;     Dedicated logic registers      ; 0 / 114,480 ( 0 % )                         ;
 ; Total registers                    ; 0                                           ;
-; Total pins                         ; 2 / 529 ( < 1 % )                           ;
+; Total pins                         ; 64 / 529 ( 12 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 3,981,312 ( 0 % )                       ;
 ; Embedded Multiplier 9-bit elements ; 0 / 532 ( 0 % )                             ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/04/2017 22:52:11 ;
+; Start date & time ; 04/05/2017 10:01:29 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MIPS_VHDL           ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 110073157034591.149135713104662       ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 0.149139728819381                     ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                  ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
@@ -96,26 +96,26 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:20     ; 1.0                     ; 1175 MB             ; 00:00:44                           ;
-; Fitter                    ; 00:00:14     ; 1.0                     ; 1487 MB             ; 00:00:17                           ;
-; Assembler                 ; 00:00:05     ; 1.0                     ; 1019 MB             ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 1094 MB             ; 00:00:02                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 1265 MB             ; 00:00:01                           ;
-; Total                     ; 00:00:41     ; --                      ; --                  ; 00:01:09                           ;
+; Analysis & Synthesis      ; 00:00:10     ; 1.0                     ; 1164 MB             ; 00:00:02                           ;
+; Fitter                    ; 00:00:26     ; 1.0                     ; 1484 MB             ; 00:00:18                           ;
+; Assembler                 ; 00:00:06     ; 1.0                     ; 1006 MB             ; 00:00:06                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 1087 MB             ; 00:00:03                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 1258 MB             ; 00:00:01                           ;
+; Total                     ; 00:00:49     ; --                      ; --                  ; 00:00:30                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                           ;
-+---------------------------+------------------+--------------+------------+----------------+
-; Module Name               ; Machine Hostname ; OS Name      ; OS Version ; Processor type ;
-+---------------------------+------------------+--------------+------------+----------------+
-; Analysis & Synthesis      ; breno-lenovo-pc  ; Ubuntu 15.04 ; 15         ; x86_64         ;
-; Fitter                    ; breno-lenovo-pc  ; Ubuntu 15.04 ; 15         ; x86_64         ;
-; Assembler                 ; breno-lenovo-pc  ; Ubuntu 15.04 ; 15         ; x86_64         ;
-; TimeQuest Timing Analyzer ; breno-lenovo-pc  ; Ubuntu 15.04 ; 15         ; x86_64         ;
-; EDA Netlist Writer        ; breno-lenovo-pc  ; Ubuntu 15.04 ; 15         ; x86_64         ;
-+---------------------------+------------------+--------------+------------+----------------+
++---------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                             ;
++---------------------------+------------------+----------------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name        ; OS Version ; Processor type ;
++---------------------------+------------------+----------------+------------+----------------+
+; Analysis & Synthesis      ; lcc-07           ; Ubuntu 16.04.1 ; 16         ; x86_64         ;
+; Fitter                    ; lcc-07           ; Ubuntu 16.04.1 ; 16         ; x86_64         ;
+; Assembler                 ; lcc-07           ; Ubuntu 16.04.1 ; 16         ; x86_64         ;
+; TimeQuest Timing Analyzer ; lcc-07           ; Ubuntu 16.04.1 ; 16         ; x86_64         ;
+; EDA Netlist Writer        ; lcc-07           ; Ubuntu 16.04.1 ; 16         ; x86_64         ;
++---------------------------+------------------+----------------+------------+----------------+
 
 
 ------------
