@@ -7,9 +7,11 @@ entity comp_regP4_MEM_WB is
 		
 		new_ula           : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dado_leitura  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_regEsc        : in  STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_ula          : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_dado_leitura : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_regEsc       : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle entrada			
 		--WB
@@ -28,6 +30,7 @@ end comp_regP4_MEM_WB;
 architecture arc of comp_regP4_MEM_WB is
 	signal reg_ula          : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_dado_leitura : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
 	
 	--registradores dos sinais de controle
 	--WB
@@ -36,11 +39,13 @@ architecture arc of comp_regP4_MEM_WB is
 begin
 	process (clk, reg_ula, reg_dado_leitura, new_ula, new_dado_leitura,
 				new_EscreveReg, new_MemparaReg,
-				reg_EscreveReg, reg_MemparaReg)
+				reg_EscreveReg, reg_MemparaReg,
+				reg_regEsc, new_regEsc)
 	begin
 		if (clk = '1' and clk'event) then
 			Q_ula           <= reg_ula;
 			Q_dado_leitura  <= reg_dado_leitura;
+			Q_regEsc <= reg_regEsc;
 			
 			--WB
 			Q_EscreveReg <= reg_EscreveReg;
@@ -48,6 +53,7 @@ begin
 			
 			reg_ula          <= new_ula;
 			reg_dado_leitura <= new_dado_leitura;
+			reg_regEsc <= new_regEsc;
 			
 			--WB
 			reg_EscreveReg <= new_EscreveReg;

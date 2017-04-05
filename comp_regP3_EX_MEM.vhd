@@ -9,6 +9,7 @@ entity comp_regP3_EX_MEM is
 		new_ula  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_sum  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_D2   : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_regEsc : in STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle entrada		
 		--MEM
@@ -25,6 +26,7 @@ entity comp_regP3_EX_MEM is
 		Q_ula  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_sum  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2   : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle saida		
 		--MEM
@@ -44,6 +46,7 @@ architecture arc of comp_regP3_EX_MEM is
 	signal reg_ula  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_sum  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D2   : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
 	
 	--registradores dos sinais de controle
 	--MEM
@@ -61,13 +64,15 @@ begin
 				new_Branch, new_LeMem, new_EscreveMem,
 				new_EscreveReg, new_MemparaReg,
 				reg_Branch, reg_LeMem, reg_EscreveMem,
-				reg_EscreveReg, reg_MemparaReg)
+				reg_EscreveReg, reg_MemparaReg,
+				reg_regEsc, new_regEsc)
 	begin
 		if (clk = '1' and clk'event) then
 			Q_zero <= reg_zero;
 			Q_ula  <= reg_ula;
 			Q_sum  <= reg_sum;
 			Q_D2   <= reg_D2;
+			Q_regEsc <= reg_regEsc;
 			
 			--MEM
 			Q_Branch     <= reg_Branch;
@@ -81,6 +86,7 @@ begin
 			reg_ula  <= new_ula;
 			reg_sum  <= new_sum;
 			reg_D2   <= new_D2;
+			reg_regEsc <= new_regEsc;
 			
 			--MEM
 			reg_Branch     <= new_Branch;

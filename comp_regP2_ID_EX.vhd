@@ -8,6 +8,7 @@ entity comp_regP2_ID_EX is
 		new_dados1 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados2 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_ext    : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_regEsc : in  STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle entrada
 		--EX
@@ -27,6 +28,7 @@ entity comp_regP2_ID_EX is
 		Q_D1  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_EXT : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle saida
 		--EX
@@ -49,6 +51,7 @@ architecture arc of comp_regP2_ID_EX is
 	signal reg_D1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_ext : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
 
 	--registradores dos sinais de controle
 	--EX
@@ -69,13 +72,15 @@ begin
 				new_RegDst, new_OpALU, new_OrigALU, new_Branch, new_LeMem,
 				new_EscreveMem, new_EscreveReg, new_MemparaReg,
 				reg_RegDst, reg_OpALU, reg_OrigALU, reg_Branch, reg_LeMem,
-				reg_EscreveMem, reg_EscreveReg, reg_MemparaReg)
+				reg_EscreveMem, reg_EscreveReg, reg_MemparaReg,
+				reg_regEsc, new_regEsc)
 	begin
 		if (clk = '1' and clk'event) then
 			Q_PC  <= reg_PC;
 			Q_D1  <= reg_D1;
 			Q_D2  <= reg_D2;
 			Q_EXT <= reg_ext;
+			Q_regEsc <= reg_regEsc;
 			
 			--EX
 			Q_RegDst  <= reg_RegDst;
@@ -93,6 +98,7 @@ begin
 			reg_D1  <= new_dados1;
 			reg_D2  <= new_dados2;
 			reg_ext <= new_ext;
+			reg_regEsc <= new_regEsc;
 			
 			--EX
 			reg_RegDst  <= new_RegDst;
