@@ -1,5 +1,5 @@
 Assembler report for MIPS_VHDL
-Wed Apr  5 10:02:23 2017
+Fri Apr  7 12:42:45 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -38,7 +38,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Apr  5 10:02:23 2017 ;
+; Assembler Status      ; Successful - Fri Apr  7 12:42:45 2017 ;
 ; Revision Name         ; MIPS_VHDL                             ;
 ; Top-level Entity Name ; mips_vhdl                             ;
 ; Family                ; Cyclone IV E                          ;
@@ -79,14 +79,14 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Wed Apr  5 10:02:17 2017
+    Info: Processing started: Fri Apr  7 12:42:39 2017
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off MIPS_VHDL -c MIPS_VHDL
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 1006 megabytes
-    Info: Processing ended: Wed Apr  5 10:02:23 2017
+    Info: Peak virtual memory: 1016 megabytes
+    Info: Processing ended: Fri Apr  7 12:42:45 2017
     Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:06
+    Info: Total CPU time (on all processors): 00:00:05
 
 

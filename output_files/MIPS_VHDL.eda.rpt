@@ -1,5 +1,5 @@
 EDA Netlist Writer report for MIPS_VHDL
-Wed Apr  5 10:02:40 2017
+Fri Apr  7 12:43:02 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -37,7 +37,7 @@ agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Wed Apr  5 10:02:40 2017 ;
+; EDA Netlist Writer Status ; Successful - Fri Apr  7 12:43:02 2017 ;
 ; Revision Name             ; MIPS_VHDL                             ;
 ; Top-level Entity Name     ; mips_vhdl                             ;
 ; Family                    ; Cyclone IV E                          ;
@@ -67,20 +67,20 @@ agreement for further details.
 +---------------------------------------------------------------------------------------------------+------------------------+
 
 
-+-------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                ;
-+-------------------------------------------------------------------------------------------+
-; Generated Files                                                                           ;
-+-------------------------------------------------------------------------------------------+
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_85c_slow.vho      ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_0c_slow.vho       ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_min_1200mv_0c_fast.vho     ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL.vho                        ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_85c_vhd_slow.sdo  ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_0c_vhd_slow.sdo   ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_min_1200mv_0c_vhd_fast.sdo ;
-; /home/breno/Documentos/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_vhd.sdo                    ;
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                          ;
++-------------------------------------------------------------------------------------+
+; Generated Files                                                                     ;
++-------------------------------------------------------------------------------------+
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_85c_slow.vho      ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_0c_slow.vho       ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_min_1200mv_0c_fast.vho     ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL.vho                        ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_85c_vhd_slow.sdo  ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_7_1200mv_0c_vhd_slow.sdo   ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_min_1200mv_0c_vhd_fast.sdo ;
+; /home/breno/gitH/MIPS_VHDL/simulation/modelsim/MIPS_VHDL_vhd.sdo                    ;
++-------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -89,20 +89,20 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Wed Apr  5 10:02:38 2017
+    Info: Processing started: Fri Apr  7 12:43:01 2017
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MIPS_VHDL -c MIPS_VHDL
-Info (204019): Generated file MIPS_VHDL_7_1200mv_85c_slow.vho in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_7_1200mv_0c_slow.vho in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_min_1200mv_0c_fast.vho in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL.vho in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_7_1200mv_85c_vhd_slow.sdo in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_7_1200mv_0c_vhd_slow.sdo in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_min_1200mv_0c_vhd_fast.sdo in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MIPS_VHDL_vhd.sdo in folder "/home/breno/Documentos/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_7_1200mv_85c_slow.vho in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_7_1200mv_0c_slow.vho in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_min_1200mv_0c_fast.vho in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL.vho in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_7_1200mv_85c_vhd_slow.sdo in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_7_1200mv_0c_vhd_slow.sdo in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_min_1200mv_0c_vhd_fast.sdo in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MIPS_VHDL_vhd.sdo in folder "/home/breno/gitH/MIPS_VHDL/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 1258 megabytes
-    Info: Processing ended: Wed Apr  5 10:02:40 2017
-    Info: Elapsed time: 00:00:02
+    Info: Peak virtual memory: 1264 megabytes
+    Info: Processing ended: Fri Apr  7 12:43:02 2017
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 

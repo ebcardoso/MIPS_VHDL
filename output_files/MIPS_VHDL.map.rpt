@@ -1,5 +1,5 @@
 Analysis & Synthesis report for MIPS_VHDL
-Wed Apr  5 10:01:39 2017
+Fri Apr  7 12:42:06 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -43,7 +43,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr  5 10:01:38 2017       ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr  7 12:42:06 2017       ;
 ; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
 ; Revision Name                      ; MIPS_VHDL                                   ;
 ; Top-level Entity Name              ; mips_vhdl                                   ;
@@ -66,7 +66,7 @@ agreement for further details.
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                     ; EP4CE115F29C7      ;                    ;
-; Top-level entity name                                                      ; MIPS_VHDL          ; MIPS_VHDL          ;
+; Top-level entity name                                                      ; mips_vhdl          ; MIPS_VHDL          ;
 ; Family name                                                                ; Cyclone IV E       ; Cyclone V          ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
@@ -153,19 +153,19 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                         ; Library ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
-; MIPS_VHDL.vhd                    ; yes             ; User VHDL File  ; /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd       ;         ;
-; comp_desloc2esq.vhd              ; yes             ; User VHDL File  ; /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd ;         ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                          ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                   ; Library ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
+; comp_desloc2esq.vhd              ; yes             ; User VHDL File  ; /home/breno/gitH/MIPS_VHDL/comp_desloc2esq.vhd ;         ;
+; MIPS_VHDL.vhd                    ; yes             ; User VHDL File  ; /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd       ;         ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------------+
@@ -244,7 +244,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -254,66 +254,75 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Wed Apr  5 10:01:27 2017
+    Info: Processing started: Fri Apr  7 12:41:42 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MIPS_VHDL -c MIPS_VHDL
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file comp_mux2RegDst.vhd
+    Info (12022): Found design unit 1: comp_mux2RegDst-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux2RegDst.vhd Line: 15
+    Info (12023): Found entity 1: comp_mux2RegDst File: /home/breno/gitH/MIPS_VHDL/comp_mux2RegDst.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_mux2OrigPC.vhd
+    Info (12022): Found design unit 1: comp_mux2OrigPC-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux2OrigPC.vhd Line: 15
+    Info (12023): Found entity 1: comp_mux2OrigPC File: /home/breno/gitH/MIPS_VHDL/comp_mux2OrigPC.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_mux2MemparaReg.vhd
+    Info (12022): Found design unit 1: comp_mux2MemparaReg-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux2MemparaReg.vhd Line: 15
+    Info (12023): Found entity 1: comp_mux2MemparaReg File: /home/breno/gitH/MIPS_VHDL/comp_mux2MemparaReg.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_controle.vhd
+    Info (12022): Found design unit 1: comp_controle-behavior File: /home/breno/gitH/MIPS_VHDL/comp_controle.vhd Line: 24
+    Info (12023): Found entity 1: comp_controle File: /home/breno/gitH/MIPS_VHDL/comp_controle.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_mem_instrucoes.vhd
-    Info (12022): Found design unit 1: comp_mem_instrucoes-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 14
-    Info (12023): Found entity 1: comp_mem_instrucoes File: /home/breno/Documentos/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 4
+    Info (12022): Found design unit 1: comp_mem_instrucoes-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 14
+    Info (12023): Found entity 1: comp_mem_instrucoes File: /home/breno/gitH/MIPS_VHDL/comp_mem_instrucoes.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_regP1_IF_ID.vhd
-    Info (12022): Found design unit 1: comp_regP1_IF_ID-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 15
-    Info (12023): Found entity 1: comp_regP1_IF_ID File: /home/breno/Documentos/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_registradores.vhd
-    Info (12022): Found design unit 1: comp_registradores-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_registradores.vhd Line: 19
-    Info (12023): Found entity 1: comp_registradores File: /home/breno/Documentos/MIPS_VHDL/comp_registradores.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_PC.vhd
-    Info (12022): Found design unit 1: comp_PC-arc File: /home/breno/Documentos/MIPS_VHDL/comp_PC.vhd Line: 12
-    Info (12023): Found entity 1: comp_PC File: /home/breno/Documentos/MIPS_VHDL/comp_PC.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_regP4_MEM_WB.vhd
-    Info (12022): Found design unit 1: comp_regP4_MEM_WB-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 30
-    Info (12023): Found entity 1: comp_regP4_MEM_WB File: /home/breno/Documentos/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_regP3_EX_MEM.vhd
-    Info (12022): Found design unit 1: comp_regP3_EX_MEM-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 44
-    Info (12023): Found entity 1: comp_regP3_EX_MEM File: /home/breno/Documentos/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_regP2_ID_EX.vhd
-    Info (12022): Found design unit 1: comp_regP2_ID_EX-arc File: /home/breno/Documentos/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 49
-    Info (12023): Found entity 1: comp_regP2_ID_EX File: /home/breno/Documentos/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_somador32.vhd
-    Info (12022): Found design unit 1: comp_somador32-arc File: /home/breno/Documentos/MIPS_VHDL/comp_somador32.vhd Line: 14
-    Info (12023): Found entity 1: comp_somador32 File: /home/breno/Documentos/MIPS_VHDL/comp_somador32.vhd Line: 6
-Info (12021): Found 2 design units, including 1 entities, in source file comp_somadorPC.vhd
-    Info (12022): Found design unit 1: comp_somadorPC-arc File: /home/breno/Documentos/MIPS_VHDL/comp_somadorPC.vhd Line: 13
-    Info (12023): Found entity 1: comp_somadorPC File: /home/breno/Documentos/MIPS_VHDL/comp_somadorPC.vhd Line: 6
-Info (12021): Found 2 design units, including 1 entities, in source file comp_mux2.vhd
-    Info (12022): Found design unit 1: comp_mux2-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mux2.vhd Line: 15
-    Info (12023): Found entity 1: comp_mux2 File: /home/breno/Documentos/MIPS_VHDL/comp_mux2.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file comp_mux4.vhd
-    Info (12022): Found design unit 1: comp_mux4-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_mux4.vhd Line: 17
-    Info (12023): Found entity 1: comp_mux4 File: /home/breno/Documentos/MIPS_VHDL/comp_mux4.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file MIPS_VHDL.vhd
-    Info (12022): Found design unit 1: mips_vhdl-behavior File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 11
-    Info (12023): Found entity 1: mips_vhdl File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 4
+    Info (12022): Found design unit 1: comp_regP1_IF_ID-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 15
+    Info (12023): Found entity 1: comp_regP1_IF_ID File: /home/breno/gitH/MIPS_VHDL/comp_regP1_IF_ID.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file comp_desloc2esq.vhd
-    Info (12022): Found design unit 1: comp_desloc2esc-behavior File: /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd Line: 11
-    Info (12023): Found entity 1: comp_desloc2esc File: /home/breno/Documentos/MIPS_VHDL/comp_desloc2esq.vhd Line: 4
-Info (12127): Elaborating entity "MIPS_VHDL" for the top level hierarchy
-Info (12128): Elaborating entity "comp_desloc2esc" for hierarchy "comp_desloc2esc:PM1" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 21
+    Info (12022): Found design unit 1: comp_desloc2esc-behavior File: /home/breno/gitH/MIPS_VHDL/comp_desloc2esq.vhd Line: 11
+    Info (12023): Found entity 1: comp_desloc2esc File: /home/breno/gitH/MIPS_VHDL/comp_desloc2esq.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_registradores.vhd
+    Info (12022): Found design unit 1: comp_registradores-behavior File: /home/breno/gitH/MIPS_VHDL/comp_registradores.vhd Line: 19
+    Info (12023): Found entity 1: comp_registradores File: /home/breno/gitH/MIPS_VHDL/comp_registradores.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_PC.vhd
+    Info (12022): Found design unit 1: comp_PC-arc File: /home/breno/gitH/MIPS_VHDL/comp_PC.vhd Line: 12
+    Info (12023): Found entity 1: comp_PC File: /home/breno/gitH/MIPS_VHDL/comp_PC.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_regP4_MEM_WB.vhd
+    Info (12022): Found design unit 1: comp_regP4_MEM_WB-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 30
+    Info (12023): Found entity 1: comp_regP4_MEM_WB File: /home/breno/gitH/MIPS_VHDL/comp_regP4_MEM_WB.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_regP3_EX_MEM.vhd
+    Info (12022): Found design unit 1: comp_regP3_EX_MEM-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 44
+    Info (12023): Found entity 1: comp_regP3_EX_MEM File: /home/breno/gitH/MIPS_VHDL/comp_regP3_EX_MEM.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_regP2_ID_EX.vhd
+    Info (12022): Found design unit 1: comp_regP2_ID_EX-arc File: /home/breno/gitH/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 51
+    Info (12023): Found entity 1: comp_regP2_ID_EX File: /home/breno/gitH/MIPS_VHDL/comp_regP2_ID_EX.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_mux4.vhd
+    Info (12022): Found design unit 1: comp_mux4-behavior File: /home/breno/gitH/MIPS_VHDL/comp_mux4.vhd Line: 17
+    Info (12023): Found entity 1: comp_mux4 File: /home/breno/gitH/MIPS_VHDL/comp_mux4.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file comp_somador32.vhd
+    Info (12022): Found design unit 1: comp_somador32-arc File: /home/breno/gitH/MIPS_VHDL/comp_somador32.vhd Line: 14
+    Info (12023): Found entity 1: comp_somador32 File: /home/breno/gitH/MIPS_VHDL/comp_somador32.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file comp_somadorPC.vhd
+    Info (12022): Found design unit 1: comp_somadorPC-arc File: /home/breno/gitH/MIPS_VHDL/comp_somadorPC.vhd Line: 13
+    Info (12023): Found entity 1: comp_somadorPC File: /home/breno/gitH/MIPS_VHDL/comp_somadorPC.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file MIPS_VHDL.vhd
+    Info (12022): Found design unit 1: mips_vhdl-behavior File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 11
+    Info (12023): Found entity 1: mips_vhdl File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 4
+Info (12127): Elaborating entity "mips_vhdl" for the top level hierarchy
+Info (12128): Elaborating entity "comp_desloc2esc" for hierarchy "comp_desloc2esc:PM1" File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 21
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "saida[0]" is stuck at GND File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
-    Warning (13410): Pin "saida[1]" is stuck at GND File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
+    Warning (13410): Pin "saida[0]" is stuck at GND File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
+    Warning (13410): Pin "saida[1]" is stuck at GND File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 7
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 3 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "entrada[19]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
-    Warning (15610): No output dependent on input pin "entrada[30]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
-    Warning (15610): No output dependent on input pin "entrada[31]" File: /home/breno/Documentos/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+    Warning (15610): No output dependent on input pin "entrada[19]" File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+    Warning (15610): No output dependent on input pin "entrada[30]" File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
+    Warning (15610): No output dependent on input pin "entrada[31]" File: /home/breno/gitH/MIPS_VHDL/MIPS_VHDL.vhd Line: 6
 Info (21057): Implemented 64 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 32 input pins
     Info (21059): Implemented 32 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 1184 megabytes
-    Info: Processing ended: Wed Apr  5 10:01:39 2017
-    Info: Elapsed time: 00:00:12
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Peak virtual memory: 1192 megabytes
+    Info: Processing ended: Fri Apr  7 12:42:06 2017
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:43
 
 

@@ -1,5 +1,5 @@
 Fitter report for MIPS_VHDL
-Wed Apr  5 10:02:09 2017
+Fri Apr  7 12:42:31 2017
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -59,7 +59,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Wed Apr  5 10:02:09 2017       ;
+; Fitter Status                      ; Successful - Fri Apr  7 12:42:31 2017       ;
 ; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
 ; Revision Name                      ; MIPS_VHDL                                   ;
 ; Top-level Entity Name              ; mips_vhdl                                   ;
@@ -144,7 +144,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -323,7 +323,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in /home/breno/Documentos/MIPS_VHDL/output_files/MIPS_VHDL.pin.
+The pin-out file can be found in /home/breno/gitH/MIPS_VHDL/output_files/MIPS_VHDL.pin.
 
 
 +---------------------------------------------------------------------+
@@ -1738,7 +1738,7 @@ Info (176215): I/O bank details before I/O pin placement
         Info (176213): I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 1 total pin(s) used --  57 pins available
         Info (176213): I/O bank number 7 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  72 pins available
         Info (176213): I/O bank number 8 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  71 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:03
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1751,24 +1751,24 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.03 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
+Info (11888): Total time spent on timing analysis during the Fitter is 0.01 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:02
-Info (144001): Generated suppressed messages file /home/breno/Documentos/MIPS_VHDL/output_files/MIPS_VHDL.fit.smsg
+Info (144001): Generated suppressed messages file /home/breno/gitH/MIPS_VHDL/output_files/MIPS_VHDL.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 1484 megabytes
-    Info: Processing ended: Wed Apr  5 10:02:10 2017
-    Info: Elapsed time: 00:00:27
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Peak virtual memory: 1490 megabytes
+    Info: Processing ended: Fri Apr  7 12:42:32 2017
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:18
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in /home/breno/Documentos/MIPS_VHDL/output_files/MIPS_VHDL.fit.smsg.
+The suppressed messages can be found in /home/breno/gitH/MIPS_VHDL/output_files/MIPS_VHDL.fit.smsg.
 
 

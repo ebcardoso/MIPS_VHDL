@@ -1,4 +1,4 @@
-|MIPS_VHDL
+|mips_vhdl
 entrada[0] => comp_desloc2esc:PM1.in0[0]
 entrada[1] => comp_desloc2esc:PM1.in0[1]
 entrada[2] => comp_desloc2esc:PM1.in0[2]
@@ -65,7 +65,7 @@ saida[30] << comp_desloc2esc:PM1.out0[30]
 saida[31] << comp_desloc2esc:PM1.out0[31]
 
 
-|MIPS_VHDL|comp_desloc2esc:PM1
+|mips_vhdl|comp_desloc2esc:PM1
 in0[0] => out0[2].DATAIN
 in0[1] => out0[3].DATAIN
 in0[2] => out0[4].DATAIN
