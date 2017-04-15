@@ -1,0 +1,13 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY comp_ULA_Controle IS
+	PORT (
+		OPCode : in STD_LOGIC_VECTOR(5 downto 0)
+	);
+END comp_ULA_Controle;
+
+ARCHITECTURE behavior OF comp_ULA_Controle IS
+BEGIN
+
+END behavior;

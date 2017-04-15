@@ -1,4 +1,4 @@
-Analysis & Synthesis Status : Successful - Fri Apr  7 12:42:06 2017
+Analysis & Synthesis Status : Successful - Mon Apr 10 23:13:54 2017
 Quartus Prime Version : 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 Revision Name : MIPS_VHDL
 Top-level Entity Name : mips_vhdl
@@ -7,7 +7,7 @@ Total logic elements : 0
     Total combinational functions : 0
     Dedicated logic registers : 0
 Total registers : 0
-Total pins : 64
+Total pins : 1
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

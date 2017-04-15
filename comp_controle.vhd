@@ -25,7 +25,7 @@ ARCHITECTURE behavior OF comp_controle IS
 BEGIN
 	process(OPCode)
 	begin
-		if    (OPCode = "000000")	then
+		if    (OPCode = "000000")	then --R
 			--MEM
 			Q_RegDst  <= '1';
 			Q_OpALU   <= "10";
@@ -37,7 +37,7 @@ BEGIN
 			--WB
 			Q_EscreveReg <= '1';
 			Q_MemparaReg <= '0';
-		elsif (OPCode = "100101") then
+		elsif (OPCode = "100101") then --lw
 			--MEM
 			Q_RegDst  <= '0';
 			Q_OpALU   <= "00";
@@ -49,7 +49,7 @@ BEGIN
 			--WB
 			Q_EscreveReg <= '1';
 			Q_MemparaReg <= '1';
-		elsif (OPCode = "101101") then
+		elsif (OPCode = "101101") then --sw
 			--MEM
 			Q_OpALU   <= "00";
 			Q_OrigALU <= '1';
@@ -59,7 +59,7 @@ BEGIN
 			Q_EscreveMem <= '1';
 			--WB
 			Q_EscreveReg <= '0';
-		elsif (OPCode = "000100") then
+		elsif (OPCode = "000100") then --beq
 			--MEM
 			Q_OpALU   <= "01";
 			Q_OrigALU <= '0';
