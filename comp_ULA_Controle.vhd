@@ -35,8 +35,8 @@ BEGIN
 				out0 <= "0000";
 			elsif (funct = "100111") then --ori
 				out0 <= "0001";
-			elsif (funct = "101000") then -- sll
-			elsif (funct = "101001") then -- srl
+			elsif (funct = "101000") then --sll
+			elsif (funct = "101001") then --srl
 			elsif (funct = "101010") then --slt -- livro
 				out0 <= "0111";
 			elsif (funct = "101011") then
