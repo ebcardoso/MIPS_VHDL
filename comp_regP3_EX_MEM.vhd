@@ -3,6 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity comp_regP3_EX_MEM is
 	port (
+		allow_read  : in  STD_LOGIC;
+		allow_write : in  STD_LOGIC;
 		clk : in  STD_LOGIC;
 		
 		new_zero : in  STD_LOGIC;
@@ -58,7 +60,7 @@ architecture arc of comp_regP3_EX_MEM is
 	signal reg_EscreveReg : STD_LOGIC := '0';
 	signal reg_MemparaReg : STD_LOGIC := '0';
 begin
-	process (clk,
+	process (clk, allow_read, allow_write,
 				reg_zero, reg_ula, reg_sum, reg_D2,
 				new_zero, new_ula, new_sum, new_D2,
 				new_Branch, new_LeMem, new_EscreveMem,
@@ -68,33 +70,37 @@ begin
 				reg_regEsc, new_regEsc)
 	begin
 		if (clk = '1' and clk'event) then
-			Q_zero <= reg_zero;
-			Q_ula  <= reg_ula;
-			Q_sum  <= reg_sum;
-			Q_D2   <= reg_D2;
-			Q_regEsc <= reg_regEsc;
+			if (allow_read = '1') then
+				Q_zero <= reg_zero;
+				Q_ula  <= reg_ula;
+				Q_sum  <= reg_sum;
+				Q_D2   <= reg_D2;
+				Q_regEsc <= reg_regEsc;
+				
+				--MEM
+				Q_Branch     <= reg_Branch;
+				Q_LeMem      <= reg_LeMem;
+				Q_EscreveMem <= reg_EscreveMem;
+				--WB
+				Q_EscreveReg <= reg_EscreveReg;
+				Q_MemparaReg <= reg_MemparaReg;
+			end if;
 			
-			--MEM
-			Q_Branch     <= reg_Branch;
-			Q_LeMem      <= reg_LeMem;
-			Q_EscreveMem <= reg_EscreveMem;
-			--WB
-			Q_EscreveReg <= reg_EscreveReg;
-			Q_MemparaReg <= reg_MemparaReg;
-			
-			reg_zero <= new_zero;
-			reg_ula  <= new_ula;
-			reg_sum  <= new_sum;
-			reg_D2   <= new_D2;
-			reg_regEsc <= new_regEsc;
-			
-			--MEM
-			reg_Branch     <= new_Branch;
-			reg_LeMem      <= new_LeMem;
-			reg_EscreveMem <= new_EscreveMem;	
-			--WB
-			reg_EscreveReg <= new_EscreveReg;
-			reg_MemparaReg <= new_MemparaReg;	
+			if (allow_write = '1') then
+				reg_zero <= new_zero;
+				reg_ula  <= new_ula;
+				reg_sum  <= new_sum;
+				reg_D2   <= new_D2;
+				reg_regEsc <= new_regEsc;
+				
+				--MEM
+				reg_Branch     <= new_Branch;
+				reg_LeMem      <= new_LeMem;
+				reg_EscreveMem <= new_EscreveMem;	
+				--WB
+				reg_EscreveReg <= new_EscreveReg;
+				reg_MemparaReg <= new_MemparaReg;	
+			end if;
 		end if;
 	end process;
 end arc;

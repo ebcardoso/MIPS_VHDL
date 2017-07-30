@@ -3,6 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity comp_regP4_MEM_WB is
 	port (
+		allow_read  : in  STD_LOGIC;
+		allow_write : in  STD_LOGIC;
 		clk : in  STD_LOGIC;
 		
 		new_ula           : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -37,27 +39,31 @@ architecture arc of comp_regP4_MEM_WB is
 	signal reg_EscreveReg : STD_LOGIC := '0';
 	signal reg_MemparaReg : STD_LOGIC := '0';
 begin
-	process (clk, reg_ula, reg_dado_leitura, new_ula, new_dado_leitura,
+	process (clk, allow_read, allow_write, reg_ula, reg_dado_leitura, new_ula, new_dado_leitura,
 				new_EscreveReg, new_MemparaReg,
 				reg_EscreveReg, reg_MemparaReg,
 				reg_regEsc, new_regEsc)
 	begin
 		if (clk = '1' and clk'event) then
-			Q_ula           <= reg_ula;
-			Q_dado_leitura  <= reg_dado_leitura;
-			Q_regEsc <= reg_regEsc;
+			if (allow_read = '1') then
+				Q_ula           <= reg_ula;
+				Q_dado_leitura  <= reg_dado_leitura;
+				Q_regEsc <= reg_regEsc;
+				
+				--WB
+				Q_EscreveReg <= reg_EscreveReg;
+				Q_MemparaReg <= reg_MemparaReg;
+			end if;
 			
-			--WB
-			Q_EscreveReg <= reg_EscreveReg;
-			Q_MemparaReg <= reg_MemparaReg;
-			
-			reg_ula          <= new_ula;
-			reg_dado_leitura <= new_dado_leitura;
-			reg_regEsc <= new_regEsc;
-			
-			--WB
-			reg_EscreveReg <= new_EscreveReg;
-			reg_MemparaReg <= new_MemparaReg;
+			if (allow_write = '1') then				
+				reg_ula          <= new_ula;
+				reg_dado_leitura <= new_dado_leitura;
+				reg_regEsc <= new_regEsc;
+				
+				--WB
+				reg_EscreveReg <= new_EscreveReg;
+				reg_MemparaReg <= new_MemparaReg;
+			end if;
 		end if;
 	end process;
 end arc;

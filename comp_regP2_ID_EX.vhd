@@ -3,6 +3,9 @@ use ieee.std_logic_1164.all;
 
 entity comp_regP2_ID_EX is
 	port (
+		allow_read  : in  STD_LOGIC;
+		allow_write : in  STD_LOGIC;
+		
 		clk        : in  STD_LOGIC;
 		new_PC     : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados1 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -69,7 +72,7 @@ architecture arc of comp_regP2_ID_EX is
 	signal reg_EscreveReg : STD_LOGIC := '0';
 	signal reg_MemparaReg : STD_LOGIC := '0';
 begin
-	process (clk,
+	process (clk, allow_read, allow_write,
 				reg_PC, reg_D1, reg_D2, reg_ext,
 				new_PC, new_dados1, new_dados2, new_ext,
 				new_RegDst, new_OpALU, new_OrigALU, new_Branch, new_LeMem,
@@ -80,43 +83,47 @@ begin
 				reg_regEscRD, new_regEscRD)
 	begin
 		if (clk = '1' and clk'event) then
-			Q_PC  <= reg_PC;
-			Q_D1  <= reg_D1;
-			Q_D2  <= reg_D2;
-			Q_EXT <= reg_ext;
-			Q_regEscRT <= reg_regEscRT;
-			Q_regEscRD <= reg_regEscRD;
+			if (allow_read = '1') then
+				Q_PC  <= reg_PC;
+				Q_D1  <= reg_D1;
+				Q_D2  <= reg_D2;
+				Q_EXT <= reg_ext;
+				Q_regEscRT <= reg_regEscRT;
+				Q_regEscRD <= reg_regEscRD;
+				
+				--EX
+				Q_RegDst  <= reg_RegDst;
+				Q_OpALU   <= reg_OpALU;
+				Q_OrigALU <= reg_OrigALU;
+				--MEM
+				Q_Branch     <= reg_Branch;
+				Q_LeMem      <= reg_LeMem;
+				Q_EscreveMem <= reg_EscreveMem;
+				--WB
+				Q_EscreveReg <= reg_EscreveReg;
+				Q_MemparaReg <= reg_MemparaReg;
+			end if;
 			
-			--EX
-			Q_RegDst  <= reg_RegDst;
-			Q_OpALU   <= reg_OpALU;
-			Q_OrigALU <= reg_OrigALU;
-			--MEM
-			Q_Branch     <= reg_Branch;
-			Q_LeMem      <= reg_LeMem;
-			Q_EscreveMem <= reg_EscreveMem;
-			--WB
-			Q_EscreveReg <= reg_EscreveReg;
-			Q_MemparaReg <= reg_MemparaReg;
-			
-			reg_PC  <= new_PC;
-			reg_D1  <= new_dados1;
-			reg_D2  <= new_dados2;
-			reg_ext <= new_ext;
-			reg_regEscRT <= new_regEscRT;
-			reg_regEscRD <= new_regEscRD;
-			
-			--EX
-			reg_RegDst  <= new_RegDst;
-			reg_OpALU   <= new_OpALU;
-			reg_OrigALU <= new_OrigALU;
-			--MEM
-			reg_Branch     <= new_Branch;
-			reg_LeMem      <= new_LeMem;
-			reg_EscreveMem <= new_EscreveMem;
-			--WB
-			reg_EscreveReg <= new_EscreveReg;
-			reg_MemparaReg <= new_MemparaReg;			
+			if (allow_write = '1') then
+				reg_PC  <= new_PC;
+				reg_D1  <= new_dados1;
+				reg_D2  <= new_dados2;
+				reg_ext <= new_ext;
+				reg_regEscRT <= new_regEscRT;
+				reg_regEscRD <= new_regEscRD;
+				
+				--EX
+				reg_RegDst  <= new_RegDst;
+				reg_OpALU   <= new_OpALU;
+				reg_OrigALU <= new_OrigALU;
+				--MEM
+				reg_Branch     <= new_Branch;
+				reg_LeMem      <= new_LeMem;
+				reg_EscreveMem <= new_EscreveMem;
+				--WB
+				reg_EscreveReg <= new_EscreveReg;
+				reg_MemparaReg <= new_MemparaReg;	
+			end if;		
 		end if;
 	end process;
 end arc;
