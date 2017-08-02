@@ -11,17 +11,12 @@ ENTITY comp_ULA IS
 		in1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		in2 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
-		res  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		zero : OUT STD_LOGIC := '0';
-		
-		hi : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		lo : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		active_banco_reg : OUT STD_LOGIC := '0'
+		res  : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+		zero : OUT STD_LOGIC := '0'
 	);
 END comp_ULA;
 
 ARCHITECTURE behavior OF comp_ULA IS
-	signal multi : STD_LOGIC_VECTOR(63 DOWNTO 0);
 BEGIN
 	PROCESS (OP, in1, in2)
 	BEGIN
@@ -32,14 +27,10 @@ BEGIN
 		elsif (OP = "0010") then --sum --livro
 			res <= in1 + in2;
 		elsif (OP = "0011") then -- multi
-			multi <= in1 * in2;
-			hi <= multi(63 DOWNTO 32);
-			lo <= multi(31 DOWNTO 0);
-			active_banco_reg <= '1';
+			res <= in1 * in2;
 		elsif (OP = "0100") then --div
 			--hi <= in1 / in2;
 			--lo <= in1 mod in2;
-			--active_banco_reg <= '1';
 		elsif (OP = "0101") then
 		elsif (OP = "0110") then --sub --livro
 			res <= in1 - in2;

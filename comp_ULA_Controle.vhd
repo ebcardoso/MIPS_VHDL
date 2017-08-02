@@ -5,7 +5,8 @@ ENTITY comp_ULA_Controle IS
 	PORT (
 		opALU : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		funct : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
-		out0  : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
+		
+		out0  : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
 	);
 END comp_ULA_Controle;
 
@@ -39,7 +40,8 @@ BEGIN
 			elsif (funct = "101001") then --srl
 			elsif (funct = "101010") then --slt -- livro
 				out0 <= "0111";
-			elsif (funct = "101011") then
+			elsif (funct = "101011") then --slti
+				out0 <= "0111";
 			elsif (funct = "101100") then
 			elsif (funct = "101101") then
 			elsif (funct = "101110") then
