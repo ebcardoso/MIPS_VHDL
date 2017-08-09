@@ -17,6 +17,7 @@ ENTITY comp_ULA IS
 END comp_ULA;
 
 ARCHITECTURE behavior OF comp_ULA IS
+	signal res, mod_ : natural range 0 to 4294967295;
 BEGIN
 	PROCESS (OP, in1, in2)
 	BEGIN
@@ -29,8 +30,11 @@ BEGIN
 		elsif (OP = "0011") then -- multi
 			res <= in1 * in2;
 		elsif (OP = "0100") then --div
-			--hi <= in1 / in2;
-			--lo <= in1 mod in2;
+			res  <= to_integer(unsigned(in1))  /  to_integer(unsigned(in2));
+            mod_ <= to_integer(unsigned(in1)) mod to_integer(unsigned(in2));
+				
+            res <= std_logic_vector(to_unsigned(res, 4)) &
+				   std_logic_vector(to_unsigned(mod_, 4));
 		elsif (OP = "0101") then
 		elsif (OP = "0110") then --sub --livro
 			res <= in1 - in2;
