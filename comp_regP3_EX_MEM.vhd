@@ -8,7 +8,7 @@ entity comp_regP3_EX_MEM is
 		clk : in  STD_LOGIC;
 		
 		new_zero : in  STD_LOGIC;
-		new_ula  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_ula  : in  STD_LOGIC_VECTOR(63 DOWNTO 0);
 		new_sum  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_D2   : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_regEsc : in STD_LOGIC_VECTOR(4 DOWNTO 0);
@@ -25,7 +25,7 @@ entity comp_regP3_EX_MEM is
 		--
 		
 		Q_zero : out STD_LOGIC;
-		Q_ula  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_ula  : out STD_LOGIC_VECTOR(63 DOWNTO 0);
 		Q_sum  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2   : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
@@ -45,7 +45,7 @@ end comp_regP3_EX_MEM;
 
 architecture arc of comp_regP3_EX_MEM is
 	signal reg_zero : STD_LOGIC := '0';
-	signal reg_ula  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_ula  : STD_LOGIC_VECTOR(63 DOWNTO 0) := "0000000000000000000000000000000000000000000000000000000000000000";
 	signal reg_sum  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D2   : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";

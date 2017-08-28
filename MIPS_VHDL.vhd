@@ -334,12 +334,12 @@ END COMPONENT;
 	signal aux_R3_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	
 	--MEM
-	signal aux_R3_Branch     : STD_LOGIC;
-	signal aux_R3_LeMem      : STD_LOGIC;
-	signal aux_R3_EscreveMem : STD_LOGIC;
+	signal aux_R3_MEM_Branch     : STD_LOGIC;
+	signal aux_R3_MEM_LeMem      : STD_LOGIC;
+	signal aux_R3_MEM_EscreveMem : STD_LOGIC;
 	--WB
-	signal aux_R3_EscreveReg : STD_LOGIC;
-	signal aux_R3_MemparaReg : STD_LOGIC;
+	signal aux_R3_WB_EscreveReg : STD_LOGIC;
+	signal aux_R3_WB_MemparaReg : STD_LOGIC;
 	
 	signal aux_AND_BRANCH : STD_LOGIC;
 	signal aux_memDados_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -402,15 +402,15 @@ BEGIN
 		aux_R2_MEM_Branch, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg,
 		aux_R3_zero, aux_R3_ula, aux_R3_sum, aux_R3_D2, aux_R3_regEsc,
-		aux_R3_Branch, aux_R3_LeMem, aux_R3_EscreveMem,
-		aux_R3_EscreveReg, aux_R3_MemparaReg
+		aux_R3_MEM_Branch, aux_R3_MEM_LeMem, aux_R3_MEM_EscreveMem,
+		aux_R3_WB_EscreveReg, aux_R3_WB_MemparaReg
 	);
 
-	comp_AND : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_Branch, aux_AND_BRANCH);
+	comp_AND : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_MEM_Branch, aux_AND_BRANCH);
 	
 	com_mem_dados : comp_mem_dados port map (
 		clk,
-		aux_R3_EscreveMem, aux_R3_LeMem,
+		aux_R3_MEM_EscreveMem, aux_R3_MEM_LeMem,
 		aux_R3_ula(31 DOWNTO 0), aux_R3_D2, aux_memDados_out
 	);
 	
