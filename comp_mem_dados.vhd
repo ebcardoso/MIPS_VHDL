@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity comp_mem_dados is
     generic (
         DATA_WIDTH : integer := 32;
-        ADDR_WIDTH : integer := 8 -- 2 ^ ADDR_WIDTH addresses
+        ADDR_WIDTH : integer := 32 -- 2 ^ ADDR_WIDTH addresses
     );
     port (
         a_clock  : in std_logic;
