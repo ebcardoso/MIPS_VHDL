@@ -188,12 +188,24 @@ COMPONENT comp_desloc2esc IS
 END COMPONENT;
 
 COMPONENT comp_somador32 is
-	port (
+	PORT (
 		in1 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		in2 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		res : out STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
-end COMPONENT;
+END COMPONENT;
+
+COMPONENT comp_ULA IS
+	PORT (
+		OP : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+	
+		in1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		in2 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		
+		res  : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+		zero : OUT STD_LOGIC := '0'
+	);
+END COMPONENT;
 
 	-- Estagio 1: Busca de Instruçao
 	signal aux_PC_new : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
@@ -238,7 +250,8 @@ end COMPONENT;
 	signal aux_R2_regEscRT : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	signal aux_R2_regEscRD : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	
-	signal mux3est : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal aux_ula_zero : STD_LOGIC;
+	signal aux_ula_out : STD_LOGIC_VECTOR(63 DOWNTO 0);
 	
 	-- Estagio 4: Acesso a Memoria de Dados
 	
@@ -249,7 +262,7 @@ end COMPONENT;
 	signal aux_mux_regDest : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	
 	signal aux_mux_ula_op2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal aux_ula_ctrl_out : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal aux_ctrlUla_out : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	signal aux_shift2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_desvio : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
@@ -292,7 +305,8 @@ BEGIN
 	);
 	
 	com_mux_op2_ula : comp_mux2_32bits port map (aux_R2_D2, aux_R2_EXT, aux_R2_EX_OrigALU, aux_mux_ula_op2);
-	com_ula_ctrl : comp_ULA_Controle port map (aux_R2_EX_OpALU, aux_R2_EXT(5 DOWNTO 0), aux_ula_ctrl_out);
+	com_ula_ctrl : comp_ULA_Controle port map (aux_R2_EX_OpALU, aux_R2_EXT(5 DOWNTO 0), aux_ctrlUla_out);
+	com_ula : comp_ULA port map (aux_ctrlUla_out, aux_R2_D1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
 	
 	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_mux_regDest);
 
