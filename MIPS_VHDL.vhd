@@ -273,8 +273,36 @@ COMPONENT comp_mem_dados IS
     );
 END COMPONENT;
 
+COMPONENT comp_regP4_MEM_WB IS
+	port (
+		allow_read  : in  STD_LOGIC;
+		allow_write : in  STD_LOGIC;
+		clk : in  STD_LOGIC;
+		
+		new_ula           : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_dado_leitura  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_regEsc        : in  STD_LOGIC_VECTOR(4 DOWNTO 0);
+		
+		Q_ula          : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_dado_leitura : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_regEsc       : out STD_LOGIC_VECTOR(4 DOWNTO 0);
+		
+		--sinais de controle entrada			
+		--WB
+		new_EscreveReg : in STD_LOGIC;
+		new_MemparaReg : in STD_LOGIC;
+		--
+		
+		--sinais de controle saida		
+		--WB
+		Q_EscreveReg : out STD_LOGIC;
+		Q_MemparaReg : out STD_LOGIC
+		--
+	);
+END COMPONENT;
+
 	-- Estagio 1: Busca de Instruçao
-	signal aux_PC_new : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal aux_PC_new : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_PC_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
 	signal aux_MI_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -345,16 +373,25 @@ END COMPONENT;
 	signal aux_memDados_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
 	-- Estagio 5: Salvar Dados
-	signal aux_r4_data : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal aux_r4_addr : STD_LOGIC_VECTOR(4 DOWNTO 0);
+	signal aux_R4_ula : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal aux_R4_dado_leitura : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal aux_R4_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0);
+		
+	--WB
+	signal aux_R4_WB_EscreveReg : STD_LOGIC;
+	signal aux_R4_WB_MemparaReg : STD_LOGIC;
+	
+	signal aux_mux_data_registrador : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
 BEGIN
 	-- Estagio 1: Busca de Instruçao
+	com_mux_PC : comp_mux2_32bits port map (aux_SumPC_out, aux_R3_sum, aux_AND_BRANCH, aux_PC_new);
+	
 	com_PC    : comp_PC             port map (clk, aux_PC_new, aux_PC_out);
 	com_MI    : comp_mem_instrucoes port map (clk, '1', aux_PC_out, aux_MI_out);
 	com_SumPC : comp_somadorPC      port map (aux_PC_out, aux_SumPC_out);
 	
-	-- Estagio 2: Decodificacao da Instrucao
+	-- Estagio 2: Decodificacao da Instrucao e Busca de Operandos
 	com_R1 : comp_regP1_IF_ID    port map ('1', '1', clk, aux_PC_out, aux_MI_out, aux_r1_PC, aux_r1_Inst);
 	com_controle : comp_controle port map (
 		aux_r1_Inst(31 DOWNTO 26), 
@@ -365,8 +402,8 @@ BEGIN
 	com_extSin : comp_ext_sinal port map (aux_r1_Inst(15 DOWNTO 0), aux_extSin);
 	
 	com_reg : comp_registradores port map (
-		clk, '0', aux_r1_Inst(25 DOWNTO 21),
-		aux_r1_Inst(20 DOWNTO 16), aux_r4_addr, aux_r4_data,
+		clk, aux_R4_WB_EscreveReg, aux_r1_Inst(25 DOWNTO 21),
+		aux_r1_Inst(20 DOWNTO 16), aux_R4_regEsc, aux_mux_data_registrador,
 		aux_reg_out1, aux_reg_out2
 	); --ver o sinal de escrita
 	
@@ -415,4 +452,14 @@ BEGIN
 	);
 	
 	-- Estagio 5: Salvar Dados
+	com_R4 : comp_regP4_MEM_WB port map (
+		'1', '1', clk,
+		aux_R3_ula(31 DOWNTO 0), aux_memDados_out, aux_R3_regEsc,
+		aux_R4_ula, aux_R4_dado_leitura, aux_R4_regEsc,
+		aux_R3_WB_EscreveReg, aux_R3_WB_MemparaReg,
+		aux_R4_WB_EscreveReg, aux_R4_WB_MemparaReg
+	);
+	
+	com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_R4_dado_leitura, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
+	
 END behavior;

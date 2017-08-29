@@ -11,7 +11,7 @@ ENTITY comp_ULA IS
 		in2 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		res  : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
-		zero : OUT STD_LOGIC := '0'
+		zero : OUT STD_LOGIC
 	);
 END comp_ULA;
 
