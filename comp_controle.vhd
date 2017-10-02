@@ -26,7 +26,7 @@ BEGIN
 	process(OPCode)
 	begin
 		if    (OPCode = "000000")	then --R
-			--MEM
+			--EX
 			Q_RegDst  <= '1';
 			Q_OpALU   <= "10";
 			Q_OrigALU <= '0';
@@ -38,7 +38,7 @@ BEGIN
 			Q_EscreveReg <= '1';
 			Q_MemparaReg <= '0';
 		elsif (OPCode = "100101") then --lw
-			--MEM
+			--EX
 			Q_RegDst  <= '0';
 			Q_OpALU   <= "00";
 			Q_OrigALU <= '1';
@@ -49,8 +49,8 @@ BEGIN
 			--WB
 			Q_EscreveReg <= '1';
 			Q_MemparaReg <= '1';
-		elsif (OPCode = "101101") then --sw
-			--MEM
+		elsif (OPCode = "101011") then --sw
+			--EX
 			Q_OpALU   <= "00";
 			Q_OrigALU <= '1';
 			--MEM
@@ -60,7 +60,7 @@ BEGIN
 			--WB
 			Q_EscreveReg <= '0';
 		elsif (OPCode = "000100") then --beq
-			--MEM
+			--MEX
 			Q_OpALU   <= "01";
 			Q_OrigALU <= '0';
 			--MEM

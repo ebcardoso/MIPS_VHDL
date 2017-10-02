@@ -3,6 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity comp_PC is
 	port (
+		able_write : in STD_LOGIC;
+	
 		clk    : in  STD_LOGIC;
 		new_PC : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q      : out STD_LOGIC_VECTOR(31 DOWNTO 0)
@@ -16,7 +18,9 @@ begin
 	begin
 		if (clk = '1' and clk'event) then
 			Q <= reg_PC;
-			reg_PC <= new_PC;
+			if (able_write = '1') then
+				reg_PC <= new_PC;
+			end if;
 		end if;
 	end process;
 end arc;

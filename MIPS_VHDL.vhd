@@ -13,6 +13,8 @@ ARCHITECTURE behavior OF mips_vhdl IS
 -- Estagio 1: Busca da Instrucao
 COMPONENT comp_PC IS
 	PORT (
+		able_write : in STD_LOGIC;
+		
 		clk    : in  STD_LOGIC;
 		new_PC : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q      : out STD_LOGIC_VECTOR(31 DOWNTO 0)
@@ -274,7 +276,7 @@ COMPONENT comp_mem_dados IS
 END COMPONENT;
 
 COMPONENT comp_regP4_MEM_WB IS
-	port (
+	PORT (
 		allow_read  : in  STD_LOGIC;
 		allow_write : in  STD_LOGIC;
 		clk : in  STD_LOGIC;
@@ -387,7 +389,7 @@ BEGIN
 	-- Estagio 1: Busca de Instruçao
 	com_mux_PC : comp_mux2_32bits port map (aux_SumPC_out, aux_R3_sum, aux_AND_BRANCH, aux_PC_new);
 	
-	com_PC    : comp_PC             port map (clk, aux_PC_new, aux_PC_out);
+	com_PC    : comp_PC             port map ('1', clk, aux_PC_new, aux_PC_out);
 	com_MI    : comp_mem_instrucoes port map (clk, '1', aux_PC_out, aux_MI_out);
 	com_SumPC : comp_somadorPC      port map (aux_PC_out, aux_SumPC_out);
 	

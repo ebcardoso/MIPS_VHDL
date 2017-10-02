@@ -1,4 +1,0 @@
-|mips_vhdl
-clk => ~NO_FANOUT~
-
-
