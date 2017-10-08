@@ -16,10 +16,10 @@ entity comp_regP1_IF_ID is
 end comp_regP1_IF_ID;
 
 architecture arc of comp_regP1_IF_ID is
-	signal reg_PC    : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal reg_instr : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal reg_PC    : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_instr : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 begin
-	process (clk, allow_read, allow_write, new_PC, reg_PC, reg_instr, new_instr)
+	process (clk)
 	begin
 		if (clk = '1' and clk'event) then
 			if (allow_read = '1') then
