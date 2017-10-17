@@ -37,7 +37,7 @@ BEGIN
 			--WB
 			Q_EscreveReg <= '1';
 			Q_MemparaReg <= '0';
-		elsif (OPCode = "100101") then --lw
+		elsif (OPCode = "100011") then --lw
 			--EX
 			Q_RegDst  <= '0';
 			Q_OpALU   <= "00";

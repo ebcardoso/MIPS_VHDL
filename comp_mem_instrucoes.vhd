@@ -17,7 +17,7 @@ ARCHITECTURE behavior OF comp_mem_instrucoes IS
 	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11111" & "00001" & "00010" & "00000" & "100100";
 	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11011" & "01110" & "00000" & "100010";
 	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
-	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
 	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -46,15 +46,9 @@ ARCHITECTURE behavior OF comp_mem_instrucoes IS
 	signal r31 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
-	process(clk
---	, regLeitura1,
---	r0, r1, r2, r3, r4, r5, r6, r7, r8, r9,
---	r10, r11, r12, r13, r14, r15, r16, r17, r18, r19,
---	r20, r21, r22, r23, r24, r25, r26, r27, r28, r29,
---	r30, r31
-	)
+	process(clk)
 		begin
-			if (CLK = '1' and CLK'event) then
+			if (CLK = '0' and CLK'event) then
 				if(regLeitura1 = "00000000000000000000000000000000") then
 					dados1 <= r0;
 				elsif(regLeitura1 = "00000000000000000000000000000001") then
@@ -120,7 +114,6 @@ BEGIN
 				elsif(regLeitura1 = "00000000000000000000000000011111") then
 					dados1 <= r31;
 				end if;		
-			end if;
-			
+			end if;			
 		end process;
 END behavior;

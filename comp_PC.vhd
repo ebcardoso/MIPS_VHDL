@@ -14,13 +14,16 @@ end comp_PC;
 architecture arc of comp_PC is
 	signal reg_PC  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 begin
-	process (clk, reg_PC, new_PC)
+	process (clk)--, reg_PC, new_PC)
 	begin
 		if (clk = '1' and clk'event) then
-			Q <= reg_PC;
 			if (able_write = '1') then
 				reg_PC <= new_PC;
 			end if;
+		end if;
+		
+		if (clk = '0' and clk'event) then
+			Q <= reg_PC;
 		end if;
 	end process;
 end arc;

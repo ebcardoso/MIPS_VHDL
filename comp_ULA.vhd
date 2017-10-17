@@ -16,26 +16,26 @@ ENTITY comp_ULA IS
 END comp_ULA;
 
 ARCHITECTURE behavior OF comp_ULA IS
-	signal resu, mood : integer;
+	--signal resu, mood : integer;
 BEGIN
-	PROCESS (OP, in1, in2, resu, mood)
+	PROCESS (OP, in1, in2)--, resu, mood)
 	BEGIN
 		if    (OP = "0000") then --and --livro
-			res <= "00000000000000000000000000000000" & in1 and in2;
+			res <= "00000000000000000000000000000000" & (in1 and in2);
 		elsif (OP = "0001") then --or --livro
-			res <= "00000000000000000000000000000000" & in1 or in2;
+			res <= "00000000000000000000000000000000" & (in1 or in2);
 		elsif (OP = "0010") then --sum --livro
-			res <= "00000000000000000000000000000000" & in1 + in2;
+			res <= "00000000000000000000000000000000" & (in1 + in2);
 		elsif (OP = "0011") then -- multi
 			res <= in1 * in2;
 		elsif (OP = "0100") then --div
-			resu <= to_integer(unsigned(in1))  /  to_integer(unsigned(in2));
-         mood <= to_integer(unsigned(in1)) mod to_integer(unsigned(in2));
+--			resu <= to_integer(unsigned(in1))  /  to_integer(unsigned(in2));
+--      	mood <= to_integer(unsigned(in1)) mod to_integer(unsigned(in2));
 				
-         res <= std_logic_vector(to_unsigned(resu, 32)) & std_logic_vector(to_unsigned(mood, 32));
+			res <= std_logic_vector(to_unsigned((to_integer(unsigned(in1))  /  to_integer(unsigned(in2))), 32)) & std_logic_vector(to_unsigned((to_integer(unsigned(in1)) mod to_integer(unsigned(in2))), 32));
 		elsif (OP = "0101") then
 		elsif (OP = "0110") then --sub --livro
-			res <= "00000000000000000000000000000000" & in1 - in2;
+			res <= "00000000000000000000000000000000" & (in1 - in2);
 		elsif (OP = "0111") then --slt --livro
 			if (in1 < in2) then
 				res <= "00000000000000000000000000000000" & "00000000000000000000000000000000";

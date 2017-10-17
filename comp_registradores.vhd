@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 
 ENTITY comp_registradores IS
 	PORT (
-		clk1, clk2, clk3 : IN STD_LOGIC;
+		clk : IN STD_LOGIC;
 		escreveReg : IN STD_LOGIC;
 		
 		regLeitura1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
@@ -54,9 +54,9 @@ ARCHITECTURE behavior OF comp_registradores IS
 	signal r31 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000111000000000001111111";
 
 BEGIN
-		process(clk1)
+		process(clk)
 		begin		
-			if (clk1 = '1' and clk1'event) then
+			if (clk = '0' and clk'event) then
 				if(regLeitura1 = "00000") then
 					dados1 <= r0;
 				elsif(regLeitura1 = "00001") then
@@ -122,12 +122,7 @@ BEGIN
 				elsif(regLeitura1 = "11111") then
 					dados1 <= r31;
 				end if;
-			end if;
-		end process;
-		
-		process(clk2)
-		begin		
-			if (clk2 = '1' and clk2'event) then		
+				
 				if(regLeitura2 = "00000") then
 					dados2 <= r0;
 				elsif(regLeitura2 = "00001") then
@@ -194,81 +189,80 @@ BEGIN
 					dados2 <= r31;
 				end if;
 			end if;
-		end process;
-		
-		process(clk3)
-		begin		
-			if (clk3 = '1' and clk3'event and escreveReg = '1') then
-				if(regEscrita = "00000") then
-					r0 <= dadosEscrita;
-				elsif(regEscrita = "00001") then
-					r1 <= dadosEscrita;
-				elsif(regEscrita = "00010") then
-					r2 <= dadosEscrita;
-				elsif(regEscrita = "00011") then
-					r3 <= dadosEscrita;
-				elsif(regEscrita = "00100") then
-					r4 <= dadosEscrita;
-				elsif(regEscrita = "00101") then
-					r5 <= dadosEscrita;
-				elsif(regEscrita = "00110") then
-					r6 <= dadosEscrita;
-				elsif(regEscrita = "00111") then
-					r7 <= dadosEscrita;
-				elsif(regEscrita = "01000") then
-					r8 <= dadosEscrita;
-				elsif(regEscrita = "01001") then
-					r9 <= dadosEscrita;
-				elsif(regEscrita = "01010") then
-					r10 <= dadosEscrita;
-				elsif(regEscrita = "01011") then
-					r11 <= dadosEscrita;
-				elsif(regEscrita = "01100") then
-					r12 <= dadosEscrita;
-				elsif(regEscrita = "01101") then
-					r13 <= dadosEscrita;
-				elsif(regEscrita = "01110") then
-					r14 <= dadosEscrita;
-				elsif(regEscrita = "01111") then
-					r15 <= dadosEscrita;
-				elsif(regEscrita = "10000") then
-					r16 <= dadosEscrita;
-				elsif(regEscrita = "10001") then
-					r17 <= dadosEscrita;
-				elsif(regEscrita = "10010") then
-					r18 <= dadosEscrita;
-				elsif(regEscrita = "10011") then
-					r19 <= dadosEscrita;
-				elsif(regEscrita = "10100") then
-					r20 <= dadosEscrita;
-				elsif(regEscrita = "10101") then
-					r21 <= dadosEscrita;
-				elsif(regEscrita = "10110") then
-					r22 <= dadosEscrita;
-				elsif(regEscrita = "10111") then
-					r23 <= dadosEscrita;
-				elsif(regEscrita = "11000") then
-					r24 <= dadosEscrita;
-				elsif(regEscrita = "11001") then
-					r25 <= dadosEscrita;
-				elsif(regEscrita = "11010") then
-					r26 <= dadosEscrita;
-				elsif(regEscrita = "11011") then
-					r27 <= dadosEscrita;
-				elsif(regEscrita = "11100") then
-					r28 <= dadosEscrita;
-				elsif(regEscrita = "11101") then
-					r29 <= dadosEscrita;
-				elsif(regEscrita = "11110") then
-					r30 <= dadosEscrita;
-				elsif(regEscrita = "11111") then
-					r31 <= dadosEscrita;
+			
+			if (clk = '1' and clk'event) then
+				if (escreveReg = '1') then
+					if(regEscrita = "00000") then
+						r0 <= dadosEscrita;
+					elsif(regEscrita = "00001") then
+						r1 <= dadosEscrita;
+					elsif(regEscrita = "00010") then
+						r2 <= dadosEscrita;
+					elsif(regEscrita = "00011") then
+						r3 <= dadosEscrita;
+					elsif(regEscrita = "00100") then
+						r4 <= dadosEscrita;
+					elsif(regEscrita = "00101") then
+						r5 <= dadosEscrita;
+					elsif(regEscrita = "00110") then
+						r6 <= dadosEscrita;
+					elsif(regEscrita = "00111") then
+						r7 <= dadosEscrita;
+					elsif(regEscrita = "01000") then
+						r8 <= dadosEscrita;
+					elsif(regEscrita = "01001") then
+						r9 <= dadosEscrita;
+					elsif(regEscrita = "01010") then
+						r10 <= dadosEscrita;
+					elsif(regEscrita = "01011") then
+						r11 <= dadosEscrita;
+					elsif(regEscrita = "01100") then
+						r12 <= dadosEscrita;
+					elsif(regEscrita = "01101") then
+						r13 <= dadosEscrita;
+					elsif(regEscrita = "01110") then
+						r14 <= dadosEscrita;
+					elsif(regEscrita = "01111") then
+						r15 <= dadosEscrita;
+					elsif(regEscrita = "10000") then
+						r16 <= dadosEscrita;
+					elsif(regEscrita = "10001") then
+						r17 <= dadosEscrita;
+					elsif(regEscrita = "10010") then
+						r18 <= dadosEscrita;
+					elsif(regEscrita = "10011") then
+						r19 <= dadosEscrita;
+					elsif(regEscrita = "10100") then
+						r20 <= dadosEscrita;
+					elsif(regEscrita = "10101") then
+						r21 <= dadosEscrita;
+					elsif(regEscrita = "10110") then
+						r22 <= dadosEscrita;
+					elsif(regEscrita = "10111") then
+						r23 <= dadosEscrita;
+					elsif(regEscrita = "11000") then
+						r24 <= dadosEscrita;
+					elsif(regEscrita = "11001") then
+						r25 <= dadosEscrita;
+					elsif(regEscrita = "11010") then
+						r26 <= dadosEscrita;
+					elsif(regEscrita = "11011") then
+						r27 <= dadosEscrita;
+					elsif(regEscrita = "11100") then
+						r28 <= dadosEscrita;
+					elsif(regEscrita = "11101") then
+						r29 <= dadosEscrita;
+					elsif(regEscrita = "11110") then
+						r30 <= dadosEscrita;
+					elsif(regEscrita = "11111") then
+						r31 <= dadosEscrita;
+					end if;
 				end if;
 			end if;
-		end process;
 			
-		s1 <= r24;
-		s2 <= r18;
-		s3 <= r2;
-		s4 <= r14;
+			s1 <= r24;
+			s2 <= r18;
+			s3 <= r2;
+			s4 <= r14;
+		end process;
 END behavior;
