@@ -12,18 +12,18 @@ END comp_mem_instrucoes;
 
 ARCHITECTURE behavior OF comp_mem_instrucoes IS
 
-	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00110" & "01001" & "11000" & "00000" & "100000";
-	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "10001" & "10000" & "10010" & "00000" & "100101";
-	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11111" & "00001" & "00010" & "00000" & "100100";
-	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11011" & "01110" & "00000" & "100010";
-	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
-	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
-	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00110" & "01001" & "11000" & "00000" & "100000"; -- add 22
+	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "10001" & "10000" & "10010" & "00000" & "100101"; -- or  8191
+	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11111" & "00001" & "00010" & "00000" & "100100"; -- and 69
+	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11011" & "01110" & "00000" & "100010"; -- sub 21
+	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00101" & "00100" & "00001" & "00000" & "100000"; -- add 33
+	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11000" & "11000" & "10010" & "00000" & "100000"; -- add 44
+	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11100" & "11101" & "10011" & "00000" & "100010"; -- sub 7
+	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11101" & "11110" & "01110" & "00000" & "100100"; -- and 40
+	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "01110" & "00000" & "00000" & "100101"; -- or  61
+	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00010" & "10100" & "00000" & "00000" & "100000"; -- add 78
+	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00001" & "11000" & "10011" & "00000" & "100000"; -- add 55
+	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
 	signal r12 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r13 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r14 : STD_LOGIC_VECTOR(31 DOWNTO 0);
