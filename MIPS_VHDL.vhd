@@ -21,6 +21,9 @@ ENTITY mips_vhdl IS
 		r18 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		r02 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		r14 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r01 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r00 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r19 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		state : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		writ_reg : OUT STD_LOGIC
@@ -147,7 +150,7 @@ COMPONENT comp_registradores IS
 		dados1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		dados2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
-		s1, s2, s3, s4 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		s1, s2, s3, s4, s5, s6, s7 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -215,6 +218,15 @@ COMPONENT comp_reg_dst is
 		
 		in0  : in  std_logic_vector(4 DOWNTO 0);
 		out0 : out std_logic_vector(4 DOWNTO 0)
+	);
+end COMPONENT;
+
+COMPONENT comp_reg_wr is
+	port (
+		clk : in  std_logic;
+		
+		in0  : in  std_logic;
+		out0 : out std_logic
 	);
 end COMPONENT;
 
@@ -493,6 +505,7 @@ END COMPONENT;
 	--
 	signal aux_funct : STD_LOGIC_VECTOR(5 DOWNTO 0);
 	signal aux_dst : STD_LOGIC_VECTOR(4 DOWNTO 0);
+	signal aux_wr : STD_LOGIC;
 	
 BEGIN	
 	-- Estagio 1: Busca de Instruçao
@@ -535,11 +548,14 @@ BEGIN
 	
 	com_extSin : comp_ext_sinal port map (aux_r1_Inst(15 DOWNTO 0), aux_extSin);
 
+	com_wr : comp_reg_wr port map (clk, aux_R4_WB_EscreveReg, aux_wr);	
+	writ_reg <= aux_wr;
+	
 	com_reg : comp_registradores port map (
 		clk,
-		aux_R4_WB_EscreveReg,--'0',
+		aux_wr,--'0',
 		aux_r1_Inst(25 DOWNTO 21), aux_r1_Inst(20 DOWNTO 16), aux_R4_regEsc,
-		aux_mux_data_registrador, aux_reg_out1, aux_reg_out2, r24, r18, r02, r14
+		aux_mux_data_registrador, aux_reg_out1, aux_reg_out2, r24, r18, r02, r14, r01, r00, r19
 	); --ver o sinal de escrita
 	
 	dados1 <= aux_reg_out1; --para teste
@@ -624,5 +640,4 @@ BEGIN
 		aux_R4_WB_EscreveReg, aux_R4_WB_MemparaReg
 	);
 	com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_R4_dado_leitura, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
-	writ_reg <= aux_R4_WB_EscreveReg; --para teste
 END behavior;
