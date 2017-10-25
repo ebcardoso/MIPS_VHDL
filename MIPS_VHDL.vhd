@@ -26,8 +26,6 @@ ENTITY mips_vhdl IS
 --		r01 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 --		r00 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 --		r19 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		d16 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		d24 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		state : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		writ_reg : OUT STD_LOGIC;
@@ -364,7 +362,7 @@ END COMPONENT;
 
 COMPONENT comp_mem_dados IS
     generic (
-        DATA_WIDTH : integer := 8;
+        DATA_WIDTH : integer := 32;
         ADDR_WIDTH : integer := 32 -- 2 ^ ADDR_WIDTH addresses
     );
     port (
@@ -372,15 +370,9 @@ COMPONENT comp_mem_dados IS
 		  
         a_wren   : in std_logic;
         a_read   : in std_logic;
-		  
         a_addr   : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
-        a_data_i : in std_logic_vector(31 downto 0);
-        a_data_o : out std_logic_vector(31 downto 0);
-		  		  
-		  addr16 : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
-		  addr24 : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
-		  d16 : out std_logic_vector(ADDR_WIDTH - 1 downto 0);
-		  d24 : out std_logic_vector(ADDR_WIDTH - 1 downto 0)
+        a_data_i : in std_logic_vector(DATA_WIDTH - 1 downto 0);
+        a_data_o : out std_logic_vector(DATA_WIDTH - 1 downto 0)
     );
 END COMPONENT;
 
@@ -632,9 +624,7 @@ BEGIN
 	com_mem_dados : comp_mem_dados port map (
 		clk,
 		aux_R3_MEM_EscreveMem, aux_R3_MEM_LeMem,
-		aux_R3_ula(31 DOWNTO 0), aux_R3_D2, aux_memDados_out,
-		"00000000000000000000000000010000", "00000000000000000000000000011000",
-		d16, d24
+		aux_R3_ula(31 DOWNTO 0), aux_R3_D2, aux_memDados_out
 	);
 	
 	-- Estagio 5: Salvar Dados
