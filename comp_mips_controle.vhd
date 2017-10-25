@@ -17,20 +17,6 @@ entity comp_mips_controle is
 		
 		allow_W_PC : out STD_LOGIC;
 		
-		--sinais de controle saida
-		--EX
---		EX_RegDst  : out STD_LOGIC;
---		EX_OpALU   : out STD_LOGIC_VECTOR(1 DOWNTO 0);
---		EX_OrigALU : out STD_LOGIC;
-		--MEM
---		MEM_Branch     : out STD_LOGIC;
---		MEM_LeMem      : out STD_LOGIC;
---		MEM_EscreveMem : out STD_LOGIC;
-		--WB
---		WB_EscreveReg : out STD_LOGIC;
---		WB_MemparaReg : out STD_LOGIC;
-		--
-		
 		next_state : out STD_LOGIC_VECTOR(3 DOWNTO 0)
 		
 		--in1 : out STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -52,7 +38,7 @@ architecture arc of comp_mips_controle is
 begin
 	process (clk)--, new_inst, inst1, inst2, inst3, inst4, inst5)
 	begin
-		if (clk = '1' and clk'event) then
+		if (clk = '0' and clk'event) then
 			next_state <= state;
 			
 			if 	(state = "0000") then --BI

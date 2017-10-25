@@ -59,6 +59,7 @@ BEGIN
 			Q_EscreveMem <= '1';
 			--WB
 			Q_EscreveReg <= '0';
+			Q_MemparaReg <= '0';
 		elsif (OPCode = "000100") then --beq
 			--MEX
 			Q_OpALU   <= "01";
@@ -69,6 +70,7 @@ BEGIN
 			Q_EscreveMem <= '0';
 			--WB
 			Q_EscreveReg <= '0';
+			Q_MemparaReg <= '0';
 		end if;
 	end process;
 END behavior;

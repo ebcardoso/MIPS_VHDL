@@ -31,7 +31,7 @@ ARCHITECTURE behavior OF comp_registradores IS
 	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000001100";
 	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000001100";
 	signal r12 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r13 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r14 : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -43,7 +43,7 @@ ARCHITECTURE behavior OF comp_registradores IS
 	signal r20 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000001001";
 	signal r21 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r22 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r23 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r23 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000010000";
 	signal r24 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r25 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r26 : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -57,7 +57,7 @@ BEGIN
 		process(clk)
 		begin		
 			if (clk = '0' and clk'event) then
-				if(regLeitura1 = "00000") then
+				   if(regLeitura1 = "00000") then
 					dados1 <= r0;
 				elsif(regLeitura1 = "00001") then
 					dados1 <= r1;
@@ -123,7 +123,7 @@ BEGIN
 					dados1 <= r31;
 				end if;
 				
-				if(regLeitura2 = "00000") then
+				   if(regLeitura2 = "00000") then
 					dados2 <= r0;
 				elsif(regLeitura2 = "00001") then
 					dados2 <= r1;

@@ -18,7 +18,7 @@ BEGIN
 		begin		
 			if (op = '0') then
 				out0 <= in0;			
-			elsif (op = '1') then
+			else
 				out0 <= in1;
 			end if;						
 	end process;
