@@ -14,7 +14,7 @@ ENTITY comp_registradores IS
 		dados1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		dados2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
-		s1, s2, s3, s4, s5, s6, s7 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		s1, s2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)--, s3, s4, s5, s6, s7 
 	);
 END comp_registradores;
 
@@ -262,10 +262,10 @@ BEGIN
 			
 			s1 <= r24;
 			s2 <= r18;
-			s3 <= r2;
-			s4 <= r14;
-			s5 <= r1;
-			s6 <= r0;
-			s7 <= r19;
+--			s3 <= r2;
+--			s4 <= r14;
+--			s5 <= r1;
+--			s6 <= r0;
+--			s7 <= r19;
 		end process;
 END behavior;
