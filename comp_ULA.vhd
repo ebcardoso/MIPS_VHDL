@@ -19,6 +19,7 @@ ARCHITECTURE behavior OF comp_ULA IS
 	--signal resu, mood : integer;
 BEGIN
 	PROCESS (OP, in1, in2)--, resu, mood)
+		variable aux : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	BEGIN
 		if    (OP = "0000") then --and --livro
 			res <= "00000000000000000000000000000000" & (in1 and in2);
@@ -35,7 +36,13 @@ BEGIN
 			res <= std_logic_vector(to_unsigned((to_integer(unsigned(in1))  /  to_integer(unsigned(in2))), 32)) & std_logic_vector(to_unsigned((to_integer(unsigned(in1)) mod to_integer(unsigned(in2))), 32));
 		elsif (OP = "0101") then
 		elsif (OP = "0110") then --sub --livro
-			res <= "00000000000000000000000000000000" & (in1 - in2);
+			aux := in1 - in2;
+			res <= "00000000000000000000000000000000" & aux;
+			if (to_integer(unsigned(aux)) = 0) then
+				zero <= '1';
+			else
+				zero <= '0';
+			end if;
 		elsif (OP = "0111") then --slt --livro
 			if (in1 < in2) then
 				res <= "00000000000000000000000000000000" & "00000000000000000000000000000000";

@@ -16,6 +16,10 @@ ENTITY mips_vhdl IS
 		funcc     : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
 		ulaCtrl   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		ulaRes    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		zero      : OUT STD_LOGIC;
+		sigBrc    : OUT STD_LOGIC;
+		sumBNE    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		origPC    : OUT STD_LOGIC;
 		end4      : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		data4     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		--ulaResR3 : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
@@ -570,7 +574,11 @@ BEGIN
 		aux_R2_MEM_Branch, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg
 	);
-
+	
+	--	com_shift2 : comp_desloc2esc port map (aux_R2_EXT, aux_shift2);
+	--	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_shift2, aux_desvio);
+	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_R2_EXT, aux_desvio);
+	
 	com_aux3 : comp_aux3 port map (
 		clk,
 		aux_R2_EX_OrigALU, aux_op2,
@@ -589,15 +597,12 @@ BEGIN
 	dados22 <= aux_mux_ula_op2; --para teste
 	com_ula_ctrl : comp_ULA_Controle port map (aux_opALU, aux_funct(5 DOWNTO 0), aux_ctrlUla_out);
 	com_ula : comp_ULA port map (aux_ctrlUla_out, aux_R2_D1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
-
+	
 	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_dst);
 	com_dst : comp_reg_dst port map (clk, aux_dst, aux_mux_regDest);
 	
 	ulaCtrl <= aux_ctrlUla_out; --para teste
 	ulaRes <= aux_ula_out(31 downto 0); --para teste
-	
---	com_shift2 : comp_desloc2esc port map (aux_R2_EXT, aux_shift2);
---	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_shift2, aux_desvio);
 	
 	-- Estagio 4: Acesso a Memoria de Dados
 	com_R3 : comp_regP3_EX_MEM port map (	
@@ -614,10 +619,15 @@ BEGIN
 		aux_R3_WB_EscreveReg, aux_R3_WB_MemparaReg
 	);
 	
+	sigBrc <= aux_R3_MEM_Branch;
+	zero <= aux_R3_zero;
+	sumBNE <= aux_R3_sum;
+	
 	data4 <= aux_D2; 
 	end4  <= aux_R3_ula(31 downto 0);
 
 	comp_AND : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_MEM_Branch, aux_AND_BRANCH);
+	origPC <= aux_AND_BRANCH;
 
 	writ_md <= aux_R3_MEM_EscreveMem;
 	read_md <= aux_R3_MEM_LeMem;
@@ -638,5 +648,6 @@ BEGIN
 		
 		aux_R4_WB_EscreveReg, aux_R4_WB_MemparaReg
 	);
-	com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_R4_dado_leitura, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
+	--com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_R4_dado_leitura, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
+	com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_memDados_out, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
 END behavior;
