@@ -9,6 +9,7 @@ entity comp_regP2_ID_EX is
 		allow_write : in  STD_LOGIC;
 		
 		new_PC     : in STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_Jump   : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados1 : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados2 : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_ext    : in STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -16,6 +17,7 @@ entity comp_regP2_ID_EX is
 		new_regEscRD : in STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_PC  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_Jump  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D1  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_EXT : out STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -28,6 +30,7 @@ entity comp_regP2_ID_EX is
 		new_EX_OrigALU : in STD_LOGIC;
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
+		new_MEM_Jump       : in STD_LOGIC;
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
@@ -40,6 +43,7 @@ entity comp_regP2_ID_EX is
 		OUT_EX_OrigALU : out STD_LOGIC;
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
+		OUT_MEM_Jump       : out STD_LOGIC;
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
@@ -50,6 +54,7 @@ end comp_regP2_ID_EX;
 
 architecture arc of comp_regP2_ID_EX is
 	signal reg_PC  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_Jump  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_ext : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
@@ -63,6 +68,7 @@ architecture arc of comp_regP2_ID_EX is
 	signal reg_EX_OrigALU : STD_LOGIC := '0';
 	--MEM
 	signal reg_MEM_Branch     : STD_LOGIC := '0';
+	signal reg_MEM_Jump       : STD_LOGIC := '0';
 	signal reg_MEM_LeMem      : STD_LOGIC := '0';
 	signal reg_MEM_EscreveMem : STD_LOGIC := '0';
 	--WB
@@ -74,6 +80,7 @@ begin
 		if (clk1 = '1' and clk1'event) then		
 			if (allow_write = '1') then
 				reg_PC  <= new_PC;
+				reg_Jump  <= new_Jump;
 				reg_D1  <= new_dados1;
 				reg_D2  <= new_dados2;
 				reg_ext <= new_ext;
@@ -85,6 +92,7 @@ begin
 				reg_EX_OpALU   <= new_EX_OpALU;
 				reg_EX_OrigALU <= new_EX_OrigALU;
 				--MEM
+				reg_MEM_Jump       <= new_MEM_Jump;
 				reg_MEM_Branch     <= new_MEM_Branch;
 				reg_MEM_LeMem      <= new_MEM_LeMem;
 				reg_MEM_EscreveMem <= new_MEM_EscreveMem;
@@ -97,6 +105,7 @@ begin
 		if (clk1 = '0' and clk1'event) then
 			if (allow_read = '1') then
 				Q_PC  <= reg_PC;
+				Q_Jump  <= reg_Jump;
 				Q_D1  <= reg_D1;
 				Q_D2  <= reg_D2;
 				Q_EXT <= reg_ext;
@@ -109,6 +118,7 @@ begin
 				OUT_EX_OrigALU <= reg_EX_OrigALU;
 				--MEM
 				OUT_MEM_Branch     <= reg_MEM_Branch;
+				OUT_MEM_Jump       <= reg_MEM_Jump;
 				OUT_MEM_LeMem      <= reg_MEM_LeMem;
 				OUT_MEM_EscreveMem <= reg_MEM_EscreveMem;
 				--WB

@@ -11,18 +11,21 @@ entity comp_regP3_EX_MEM is
 		new_zero   : in STD_LOGIC;
 		new_ula    : in STD_LOGIC_VECTOR(63 DOWNTO 0);
 		new_sum    : in STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_Jump    : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_D2     : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_regEsc : in STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_zero   : out STD_LOGIC;
 		Q_ula    : out STD_LOGIC_VECTOR(63 DOWNTO 0);
 		Q_sum    : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_Jump    : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2     : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle -- entrada
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
+		new_MEM_Jump       : in STD_LOGIC;
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
@@ -32,6 +35,7 @@ entity comp_regP3_EX_MEM is
 		--sinais de controle -- saida
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
+		OUT_MEM_Jump       : out STD_LOGIC;
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
@@ -44,12 +48,14 @@ architecture arc of comp_regP3_EX_MEM is
 	signal reg_zero   : STD_LOGIC := '0';
 	signal reg_ulah   : STD_LOGIC_VECTOR(63 DOWNTO 0) := "0000000000000000000000000000000000000000000000000000000000000000";
 	signal reg_sum    : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_Jump   : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_D2     : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
 	
 	--registradores dos sinais de controle
 	--MEM
 	signal reg_MEM_Branch     : STD_LOGIC := '0';
+	signal reg_MEM_Jump       : STD_LOGIC := '0';
 	signal reg_MEM_LeMem      : STD_LOGIC := '0';
 	signal reg_MEM_EscreveMem : STD_LOGIC := '0';
 	--WB
@@ -63,11 +69,13 @@ begin
 				reg_zero <= new_zero;
 				reg_ulah <= new_ula;
 				reg_sum <= new_sum;
+				reg_Jump <= new_Jump;
 				reg_D2 <= new_D2;
 				reg_regEsc <= new_regEsc;
 				
 				--MEM
 				reg_MEM_Branch     <= new_MEM_Branch;
+				reg_MEM_Jump       <= new_MEM_Jump;
 				reg_MEM_LeMem      <= new_MEM_LeMem;
 				reg_MEM_EscreveMem <= new_MEM_EscreveMem;
 				--WB
@@ -81,11 +89,13 @@ begin
 				Q_zero <= reg_zero;
 				Q_ula <= reg_ulah;
 				Q_sum <= reg_sum;
+				Q_Jump <= reg_Jump;
 				Q_D2 <= reg_D2;
 				Q_regEsc <= reg_regEsc;
 				
 				--MEM
 				OUT_MEM_Branch     <= reg_MEM_Branch;
+				OUT_MEM_Jump       <= reg_MEM_Jump;
 				OUT_MEM_LeMem      <= reg_MEM_LeMem;
 				OUT_MEM_EscreveMem <= reg_MEM_EscreveMem;
 				--WB

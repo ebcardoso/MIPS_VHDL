@@ -1,4 +1,4 @@
-LIBRARY ieee;
+ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY comp_mem_instrucoes IS
@@ -42,9 +42,11 @@ ARCHITECTURE behavior OF comp_mem_instrucoes IS
 	signal r26 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r27 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r28 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r29 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r30 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r31 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r29 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000010" & "00000000000000000000000011";
+	signal r30 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
+	signal r31 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
+	signal r32 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
+	signal r33 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00000" & "00000" & "00000" & "00000" & "000000";
 
 BEGIN
 	process(clk)
@@ -114,6 +116,10 @@ BEGIN
 					dados1 <= r30;
 				elsif(regLeitura1 = "00000000000000000000000000011111") then
 					dados1 <= r31;
+				elsif(regLeitura1 = "00000000000000000000000000100000") then
+					dados1 <= r32;
+				elsif(regLeitura1 = "00000000000000000000000000100001") then
+					dados1 <= r33;
 				end if;		
 			end if;			
 		end process;

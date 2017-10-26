@@ -12,6 +12,7 @@ ENTITY comp_controle IS
 		Q_OrigALU : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
+		Q_Jump		 : out STD_LOGIC;
 		Q_LeMem      : out STD_LOGIC;
 		Q_EscreveMem : out STD_LOGIC;
 		--WB
@@ -32,6 +33,7 @@ BEGIN
 			Q_OrigALU <= '0';
 			--MEM
 			Q_Branch     <= '0';
+			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
 			--WB
@@ -44,6 +46,7 @@ BEGIN
 			Q_OrigALU <= '1';
 			--MEM
 			Q_Branch     <= '0';
+			Q_Jump       <= '0';
 			Q_LeMem      <= '1';
 			Q_EscreveMem <= '0';
 			--WB
@@ -55,6 +58,7 @@ BEGIN
 			Q_OrigALU <= '1';
 			--MEM
 			Q_Branch     <= '0';
+			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '1';
 			--WB
@@ -66,6 +70,19 @@ BEGIN
 			Q_OrigALU <= '0';
 			--MEM
 			Q_Branch     <= '1';
+			Q_Jump       <= '0';
+			Q_LeMem      <= '0';
+			Q_EscreveMem <= '0';
+			--WB
+			Q_EscreveReg <= '0';
+			Q_MemparaReg <= '0';
+		elsif (OPCode = "000010") then --beq
+			--MEX
+			Q_OpALU   <= "01";
+			Q_OrigALU <= '0';
+			--MEM
+			Q_Branch     <= '0';
+			Q_Jump       <= '1';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
 			--WB

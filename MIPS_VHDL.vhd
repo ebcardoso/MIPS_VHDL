@@ -28,7 +28,9 @@ ENTITY mips_vhdl IS
 		state : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		writ_reg : OUT STD_LOGIC;
 		writ_md : OUT STD_LOGIC;
-		read_md : OUT STD_LOGIC
+		read_md : OUT STD_LOGIC--;
+		--jump    : OUT STD_LOGIC;
+		--branch  : OUT STD_LOGIC
 	);
 END mips_vhdl;
 
@@ -151,6 +153,7 @@ COMPONENT comp_regP2_ID_EX is
 		allow_write : in  STD_LOGIC;
 		
 		new_PC     : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_Jump   : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados1 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_dados2 : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_ext    : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -158,6 +161,7 @@ COMPONENT comp_regP2_ID_EX is
 		new_regEscRD : in  STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_PC  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_Jump  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D1  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_EXT : out STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -170,6 +174,7 @@ COMPONENT comp_regP2_ID_EX is
 		new_EX_OrigALU : in STD_LOGIC;
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
+		new_MEM_Jump       : in STD_LOGIC;
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
@@ -182,6 +187,7 @@ COMPONENT comp_regP2_ID_EX is
 		OUT_EX_OrigALU : out STD_LOGIC;
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
+		OUT_MEM_Jump       : out STD_LOGIC;
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
@@ -214,14 +220,14 @@ END COMPONENT;
 --	);
 --END COMPONENT;
 
-COMPONENT comp_reg_dst is
-	port (
-		clk : in  std_logic;
-		
-		in0  : in  std_logic_vector(4 DOWNTO 0);
-		out0 : out std_logic_vector(4 DOWNTO 0)
-	);
-END COMPONENT;
+--COMPONENT comp_reg_dst is
+--	port (
+--		clk : in  std_logic;
+--		
+--		in0  : in  std_logic_vector(4 DOWNTO 0);
+--		out0 : out std_logic_vector(4 DOWNTO 0)
+--	);
+--END COMPONENT;
 
 --COMPONENT comp_reg_wr is
 --	port (
@@ -243,6 +249,7 @@ COMPONENT comp_controle IS
 		Q_OrigALU : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
+		Q_Jump		 : out STD_LOGIC;
 		Q_LeMem      : out STD_LOGIC;
 		Q_EscreveMem : out STD_LOGIC;
 		--WB
@@ -321,18 +328,21 @@ COMPONENT comp_regP3_EX_MEM IS
 		new_zero : in  STD_LOGIC;
 		new_ula  : in  STD_LOGIC_VECTOR(63 DOWNTO 0);
 		new_sum  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_Jump : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_D2   : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_regEsc : in STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_zero : out STD_LOGIC;
 		Q_ula  : out STD_LOGIC_VECTOR(63 DOWNTO 0);
 		Q_sum  : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_Jump : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2   : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle -- entrada
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
+		new_MEM_Jump       : in STD_LOGIC;
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
@@ -342,6 +352,7 @@ COMPONENT comp_regP3_EX_MEM IS
 		--sinais de controle -- saida
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
+		OUT_MEM_Jump     : out STD_LOGIC;
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
@@ -426,6 +437,7 @@ END COMPONENT;
 	signal aux_ctrl_EX_OpALU   : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	signal aux_ctrl_EX_OrigALU : STD_LOGIC;
 	signal aux_ctrl_MEM_Branch     : STD_LOGIC;
+	signal aux_ctrl_MEM_Jump       : STD_LOGIC;
 	signal aux_ctrl_MEM_LeMem      : STD_LOGIC;
 	signal aux_ctrl_MEM_EscreveMem : STD_LOGIC;
 	signal aux_ctrl_WB_EscreveReg : STD_LOGIC;
@@ -444,12 +456,14 @@ END COMPONENT;
 	signal aux_R2_EX_OpALU   : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	signal aux_R2_EX_OrigALU : STD_LOGIC;
 	signal aux_R2_MEM_Branch     : STD_LOGIC;
+	signal aux_R2_MEM_Jump       : STD_LOGIC;
 	signal aux_R2_MEM_LeMem      : STD_LOGIC;
 	signal aux_R2_MEM_EscreveMem : STD_LOGIC;
 	signal aux_R2_WB_EscreveReg : STD_LOGIC;
 	signal aux_R2_WB_MemparaReg : STD_LOGIC;
 	
 	signal aux_R2_PC  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal aux_R2_Jump  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal aux_R2_D1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal aux_R2_D2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal aux_R2_EXT : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
@@ -468,6 +482,7 @@ END COMPONENT;
 	
 	-- Estagio 4: Acesso a Memoria de Dados
 	signal aux_R3_MEM_Branch     : STD_LOGIC;
+	signal aux_R3_MEM_Jump       : STD_LOGIC;
 	signal aux_R3_MEM_LeMem      : STD_LOGIC;
 	signal aux_R3_MEM_EscreveMem : STD_LOGIC;
 	signal aux_R3_WB_EscreveReg : STD_LOGIC;
@@ -476,10 +491,12 @@ END COMPONENT;
 	signal aux_R3_zero : STD_LOGIC;
 	signal aux_R3_ula  : STD_LOGIC_VECTOR(63 DOWNTO 0);
 	signal aux_R3_sum  : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal aux_R3_Jump : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_R3_D2   : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_R3_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	
 	signal aux_AND_BRANCH : STD_LOGIC := '0';
+	signal aux_mux_PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_memDados_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
 	-- Estagio 5: Salvar Dados
@@ -503,8 +520,12 @@ END COMPONENT;
 --	signal aux_opALU : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	
 BEGIN	
+	--jump   <= aux_R3_MEM_Jump;
+	--branch <= aux_AND_Branch;
+	
 	-- Estagio 1: Busca de Instruçao
-	com_mux_PC : comp_mux2_32bits		port map (aux_SumPC_out, aux_R3_sum, aux_AND_BRANCH, aux_PC_new);
+	com_mux_PC : comp_mux2_32bits		port map (aux_SumPC_out, aux_R3_sum, aux_AND_BRANCH, aux_mux_PC);
+	com_JUMP   : comp_mux2_32bits		port map (aux_mux_PC, aux_R3_Jump, aux_R3_MEM_Jump, aux_PC_new);
 	com_PC     : comp_PC             port map ('1', clk, aux_PC_new, aux_PC_out);
 	pc_out 	<= aux_PC_out; --para teste
 	
@@ -530,7 +551,7 @@ BEGIN
 		aux_MI_out(31 DOWNTO 26),
 		
 		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU,
-		aux_ctrl_MEM_Branch, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
+		aux_ctrl_MEM_Branch, aux_ctrl_MEM_Jump, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg
 	);
 	
@@ -551,18 +572,18 @@ BEGIN
 		clk,
 		'1', '1',
 		
-		aux_r1_PC, aux_reg_out1, aux_reg_out2,
+		aux_r1_PC, "000000" & aux_MI_out(25 DOWNTO 0), aux_reg_out1, aux_reg_out2,
 		aux_extSin, aux_MI_out(20 DOWNTO 16), aux_MI_out(15 DOWNTO 11),
 		
-		aux_R2_PC, aux_R2_D1, aux_R2_D2, aux_R2_EXT,
+		aux_R2_PC, aux_R2_Jump, aux_R2_D1, aux_R2_D2, aux_R2_EXT,
 		aux_R2_regEscRT, aux_R2_regEscRD,
 		
 		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU,
-		aux_ctrl_MEM_Branch, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
+		aux_ctrl_MEM_Branch, aux_ctrl_MEM_Jump, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg,
 		
 		aux_R2_EX_RegDst, aux_R2_EX_OpALU, aux_R2_EX_OrigALU,
-		aux_R2_MEM_Branch, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
+		aux_R2_MEM_Branch, aux_R2_MEM_Jump, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg
 	);
 	
@@ -591,18 +612,18 @@ BEGIN
 		clk,
 		'1', '1', 
 		aux_ula_zero, aux_ula_out,
-		aux_desvio, aux_reg_out2, aux_mux_regDest,
-		aux_R3_zero, aux_R3_ula, aux_R3_sum, aux_R3_D2, aux_R3_regEsc,
+		aux_desvio, aux_R2_Jump, aux_reg_out2, aux_mux_regDest,
+		aux_R3_zero, aux_R3_ula, aux_R3_sum, aux_R3_Jump, aux_R3_D2, aux_R3_regEsc,
 		
-		aux_R2_MEM_Branch, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
+		aux_R2_MEM_Branch, aux_R2_MEM_Jump, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg,
 		
-		aux_R3_MEM_Branch, aux_R3_MEM_LeMem, aux_R3_MEM_EscreveMem,
+		aux_R3_MEM_Branch, aux_R3_MEM_Jump, aux_R3_MEM_LeMem, aux_R3_MEM_EscreveMem,
 		aux_R3_WB_EscreveReg, aux_R3_WB_MemparaReg
 	);
 
-	comp_AND : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_MEM_Branch, aux_AND_BRANCH);
-
+	com_Branch : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_MEM_Branch, aux_AND_BRANCH);
+	
 	writ_md <= aux_R3_MEM_EscreveMem;
 	read_md <= aux_R3_MEM_LeMem;
 	com_mem_dados : comp_mem_dados port map (
