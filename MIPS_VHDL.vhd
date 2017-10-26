@@ -6,8 +6,6 @@ ENTITY mips_vhdl IS
 		clk : IN STD_LOGIC;
 		inst_out  : OUT STD_LOGIC_VECTOR(31 downto 0);
 		pc_out    : OUT STD_LOGIC_VECTOR(31 downto 0);
---		inst_out2 : OUT STD_LOGIC_VECTOR(31 downto 0);
---		pc_out2   : OUT STD_LOGIC_VECTOR(31 downto 0);
 --		dados1    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 --		dados2    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		dados11   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -16,10 +14,6 @@ ENTITY mips_vhdl IS
 		funcc     : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
 		ulaCtrl   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		ulaRes    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		zero      : OUT STD_LOGIC;
-		sigBrc    : OUT STD_LOGIC;
-		sumBNE    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		origPC    : OUT STD_LOGIC;
 		end4      : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		data4     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		--ulaResR3 : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
@@ -196,29 +190,29 @@ COMPONENT comp_regP2_ID_EX is
 	);
 END COMPONENT;
 
-COMPONENT comp_aux3 is
-	port (
-		clk : in  std_logic;
-	
-		in_op2  : in std_logic;
-		out_op2 : out std_logic;
-
-		in_d2 : in std_logic_vector(31 DOWNTO 0);
-		out_d2 : out std_logic_vector(31 DOWNTO 0);
-
-		in_funct : in std_logic_vector(31 DOWNTO 0);
-		out_funct : out std_logic_vector(31 DOWNTO 0);
-
-		in_opALU : in std_logic_vector(1 DOWNTO 0);
-		out_opALU : out std_logic_vector(1 DOWNTO 0);
-
-		in_wd  : in std_logic;
-		out_wd : out std_logic;
-
-		in_rd  : in std_logic;
-		out_rd : out std_logic
-	);
-END COMPONENT;
+--COMPONENT comp_aux3 is
+--	port (
+--		clk : in  std_logic;
+--	
+--		in_op2  : in std_logic;
+--		out_op2 : out std_logic;
+--
+--		in_d2 : in std_logic_vector(31 DOWNTO 0);
+--		out_d2 : out std_logic_vector(31 DOWNTO 0);
+--
+--		in_funct : in std_logic_vector(31 DOWNTO 0);
+--		out_funct : out std_logic_vector(31 DOWNTO 0);
+--
+--		in_opALU : in std_logic_vector(1 DOWNTO 0);
+--		out_opALU : out std_logic_vector(1 DOWNTO 0);
+--
+--		in_wd  : in std_logic;
+--		out_wd : out std_logic;
+--
+--		in_rd  : in std_logic;
+--		out_rd : out std_logic
+--	);
+--END COMPONENT;
 
 COMPONENT comp_reg_dst is
 	port (
@@ -229,14 +223,14 @@ COMPONENT comp_reg_dst is
 	);
 END COMPONENT;
 
-COMPONENT comp_reg_wr is
-	port (
-		clk : in  std_logic;
-		
-		in0  : in  std_logic;
-		out0 : out std_logic
-	);
-end COMPONENT;
+--COMPONENT comp_reg_wr is
+--	port (
+--		clk : in  std_logic;
+--		
+--		in0  : in  std_logic;
+--		out0 : out std_logic
+--	);
+--end COMPONENT;
 
 COMPONENT comp_controle IS
 	PORT (
@@ -499,14 +493,14 @@ END COMPONENT;
 	signal aux_mux_data_registrador : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
 	--
-	signal aux_D2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal aux_funct : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal aux_dst : STD_LOGIC_VECTOR(4 DOWNTO 0);
-	signal aux_wr : STD_LOGIC;
-	signal aux_wd : STD_LOGIC;
-	signal aux_rd : STD_LOGIC;
-	signal aux_op2 : STD_LOGIC;
-	signal aux_opALU : STD_LOGIC_VECTOR(1 DOWNTO 0);
+--	signal aux_D2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+--	signal aux_funct : STD_LOGIC_VECTOR(31 DOWNTO 0);
+--	signal aux_dst : STD_LOGIC_VECTOR(4 DOWNTO 0);
+--	signal aux_wr : STD_LOGIC;
+--	signal aux_wd : STD_LOGIC;
+--	signal aux_rd : STD_LOGIC;
+--	signal aux_op2 : STD_LOGIC;
+--	signal aux_opALU : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	
 BEGIN	
 	-- Estagio 1: Busca de Instruçao
@@ -533,27 +527,24 @@ BEGIN
 	com_R1 : comp_regP1_IF_ID port map ('1', '1', clk, aux_SumPC_out, aux_MI_out, aux_r1_PC, aux_r1_Inst);
 	
 	com_controle : comp_controle port map (
-		aux_r1_Inst(31 DOWNTO 26),
+		aux_MI_out(31 DOWNTO 26),
 		
 		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU,
 		aux_ctrl_MEM_Branch, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg
 	);
 	
-	com_extSin : comp_ext_sinal port map (aux_r1_Inst(15 DOWNTO 0), aux_extSin);
+	com_extSin : comp_ext_sinal port map (aux_MI_out(15 DOWNTO 0), aux_extSin);
 
-	com_wr : comp_reg_wr port map (clk, aux_R4_WB_EscreveReg, aux_wr);	
-	writ_reg <= aux_wr;
+	--com_wr : comp_reg_wr port map (clk, aux_R4_WB_EscreveReg, aux_wr);	
+	writ_reg <= aux_R4_WB_EscreveReg;
 	
 	com_reg : comp_registradores port map (
 		clk,
-		aux_wr,--'0',
-		aux_r1_Inst(25 DOWNTO 21), aux_r1_Inst(20 DOWNTO 16), aux_R4_regEsc,
+		aux_R4_WB_EscreveReg,--'0',
+		aux_MI_out(25 DOWNTO 21), aux_MI_out(20 DOWNTO 16), aux_R4_regEsc,
 		aux_mux_data_registrador, aux_reg_out1, aux_reg_out2, r24, r18--, r02, r14, r01, r00, r19
-	); --ver o sinal de escrita
-	
---	dados1 <= aux_reg_out1; --para teste
---	dados2 <= aux_reg_out2; --para teste
+	);
 	
 	-- Estagio 3: Execucao
 	com_R2 : comp_regP2_ID_EX port map (
@@ -561,7 +552,7 @@ BEGIN
 		'1', '1',
 		
 		aux_r1_PC, aux_reg_out1, aux_reg_out2,
-		aux_extSin, aux_r1_Inst(20 DOWNTO 16), aux_r1_Inst(15 DOWNTO 11),
+		aux_extSin, aux_MI_out(20 DOWNTO 16), aux_MI_out(15 DOWNTO 11),
 		
 		aux_R2_PC, aux_R2_D1, aux_R2_D2, aux_R2_EXT,
 		aux_R2_regEscRT, aux_R2_regEscRD,
@@ -575,59 +566,42 @@ BEGIN
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg
 	);
 	
-	--	com_shift2 : comp_desloc2esc port map (aux_R2_EXT, aux_shift2);
-	--	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_shift2, aux_desvio);
-	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_R2_EXT, aux_desvio);
+	funcc <= aux_R2_EXT(5 DOWNTO 0); --para teste
+	dados11 <= aux_reg_out1; --para teste
+	opUla <= aux_R2_EX_OpALU;   --para teste
 	
-	com_aux3 : comp_aux3 port map (
-		clk,
-		aux_R2_EX_OrigALU, aux_op2,
-		aux_R2_D2, aux_D2,
-		aux_R2_EXT, aux_funct,
-		aux_R2_EX_OpALU, aux_opALU,
-		aux_R2_MEM_EscreveMem, aux_wd,
-		aux_R2_MEM_LeMem, aux_rd
-	);
-	
-	funcc <= aux_funct(5 DOWNTO 0); --para teste
-	dados11 <= aux_R2_D1; --para teste
-	opUla <= aux_opALU;   --para teste
-	
-	com_mux_op2_ula : comp_mux2_32bits port map (aux_R2_D2, aux_funct, aux_op2, aux_mux_ula_op2);
+	com_mux_op2_ula : comp_mux2_32bits port map (aux_reg_out2, aux_R2_EXT, aux_R2_EX_OrigALU, aux_mux_ula_op2);
 	dados22 <= aux_mux_ula_op2; --para teste
-	com_ula_ctrl : comp_ULA_Controle port map (aux_opALU, aux_funct(5 DOWNTO 0), aux_ctrlUla_out);
-	com_ula : comp_ULA port map (aux_ctrlUla_out, aux_R2_D1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
-	
-	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_dst);
-	com_dst : comp_reg_dst port map (clk, aux_dst, aux_mux_regDest);
+	com_ula_ctrl : comp_ULA_Controle port map (aux_R2_EX_OpALU, aux_R2_EXT(5 DOWNTO 0), aux_ctrlUla_out);
+	com_ula : comp_ULA port map (aux_ctrlUla_out, aux_reg_out1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
+
+	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_mux_regDest);
+--	com_dst : comp_reg_dst port map (clk, aux_dst, aux_mux_regDest);
 	
 	ulaCtrl <= aux_ctrlUla_out; --para teste
 	ulaRes <= aux_ula_out(31 downto 0); --para teste
+	
+--	com_shift2 : comp_desloc2esc port map (aux_R2_EXT, aux_shift2);
+--	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_shift2, aux_desvio);
+
+	com_soma_desvio : comp_somador32 port map(aux_R2_PC, aux_R2_EXT, aux_desvio);
 	
 	-- Estagio 4: Acesso a Memoria de Dados
 	com_R3 : comp_regP3_EX_MEM port map (	
 		clk,
 		'1', '1', 
 		aux_ula_zero, aux_ula_out,
-		aux_desvio, aux_D2, aux_mux_regDest,
+		aux_desvio, aux_reg_out2, aux_mux_regDest,
 		aux_R3_zero, aux_R3_ula, aux_R3_sum, aux_R3_D2, aux_R3_regEsc,
 		
-		aux_R2_MEM_Branch, aux_rd, aux_wd,
+		aux_R2_MEM_Branch, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg,
 		
 		aux_R3_MEM_Branch, aux_R3_MEM_LeMem, aux_R3_MEM_EscreveMem,
 		aux_R3_WB_EscreveReg, aux_R3_WB_MemparaReg
 	);
-	
-	sigBrc <= aux_R3_MEM_Branch;
-	zero <= aux_R3_zero;
-	sumBNE <= aux_R3_sum;
-	
-	data4 <= aux_D2; 
-	end4  <= aux_R3_ula(31 downto 0);
 
 	comp_AND : comp_AND_BRANCH port map (aux_R3_zero, aux_R3_MEM_Branch, aux_AND_BRANCH);
-	origPC <= aux_AND_BRANCH;
 
 	writ_md <= aux_R3_MEM_EscreveMem;
 	read_md <= aux_R3_MEM_LeMem;
@@ -648,6 +622,5 @@ BEGIN
 		
 		aux_R4_WB_EscreveReg, aux_R4_WB_MemparaReg
 	);
-	--com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_R4_dado_leitura, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
 	com_mux_R4 : comp_mux2_32bits port map (aux_R4_ula, aux_memDados_out, aux_R4_WB_MemparaReg, aux_mux_data_registrador);
 END behavior;
