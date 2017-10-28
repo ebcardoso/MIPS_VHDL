@@ -34,8 +34,9 @@ entity comp_regP2_ID_EX is
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
-		new_WB_EscreveReg : in STD_LOGIC;
-		new_WB_MemparaReg : in STD_LOGIC;
+		new_WB_EscreveReg  : in STD_LOGIC;
+		new_WB_MemparaReg  : in STD_LOGIC;
+		new_WB_EscreveHILO : in STD_LOGIC;
 		
 		--sinais de controle -- saida
 		OUT_EX_RegDst  : out STD_LOGIC;
@@ -47,8 +48,9 @@ entity comp_regP2_ID_EX is
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
-		OUT_WB_EscreveReg : out STD_LOGIC;
-		OUT_WB_MemparaReg : out STD_LOGIC
+		OUT_WB_EscreveReg  : out STD_LOGIC;
+		OUT_WB_MemparaReg  : out STD_LOGIC;
+		OUT_WB_EscreveHILO : out STD_LOGIC
 	);
 end comp_regP2_ID_EX;
 
@@ -72,8 +74,9 @@ architecture arc of comp_regP2_ID_EX is
 	signal reg_MEM_LeMem      : STD_LOGIC := '0';
 	signal reg_MEM_EscreveMem : STD_LOGIC := '0';
 	--WB
-	signal reg_WB_EscreveReg : STD_LOGIC := '0';
-	signal reg_WB_MemparaReg : STD_LOGIC := '0';
+	signal reg_WB_EscreveReg  : STD_LOGIC := '0';
+	signal reg_WB_MemparaReg  : STD_LOGIC := '0';
+	signal reg_WB_EscreveHILO : STD_LOGIC := '0';
 begin
 	process (clk1)
 	begin
@@ -98,7 +101,8 @@ begin
 				reg_MEM_EscreveMem <= new_MEM_EscreveMem;
 				--WB
 				reg_WB_EscreveReg <= new_WB_EscreveReg;
-				reg_WB_MemparaReg <= new_WB_MemparaReg;	
+				reg_WB_MemparaReg <= new_WB_MemparaReg;
+				reg_WB_EscreveHILO <= new_WB_EscreveHILO;	
 			end if;
 		end if;
 	
@@ -122,8 +126,9 @@ begin
 				OUT_MEM_LeMem      <= reg_MEM_LeMem;
 				OUT_MEM_EscreveMem <= reg_MEM_EscreveMem;
 				--WB
-				OUT_WB_EscreveReg <= reg_WB_EscreveReg;
-				OUT_WB_MemparaReg <= reg_WB_MemparaReg;
+				OUT_WB_EscreveReg  <= reg_WB_EscreveReg;
+				OUT_WB_MemparaReg  <= reg_WB_MemparaReg;
+				OUT_WB_EscreveHILO <= reg_WB_EscreveHILO;
 			end if;
 		end if;
 	end process;

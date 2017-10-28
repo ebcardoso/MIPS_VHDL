@@ -8,35 +8,38 @@ entity comp_regP4_MEM_WB is
 		allow_read  : in  STD_LOGIC;
 		allow_write : in  STD_LOGIC;
 		
-		new_ula           : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_ula           : in  STD_LOGIC_VECTOR(63 DOWNTO 0);
 		new_dado_leitura  : in  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_regEsc        : in  STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
-		Q_ula          : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_ula          : out STD_LOGIC_VECTOR(63 DOWNTO 0);
 		Q_dado_leitura : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_regEsc       : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		--sinais de controle -- entrada
 		--WB
-		new_WB_EscreveReg : in STD_LOGIC;
-		new_WB_MemparaReg : in STD_LOGIC;
+		new_WB_EscreveReg  : in STD_LOGIC;
+		new_WB_MemparaReg  : in STD_LOGIC;
+		new_WB_EscreveHILO : in STD_LOGIC;
 		
 		--sinais de controle -- saida
 		--WB
-		OUT_WB_EscreveReg : out STD_LOGIC;
-		OUT_WB_MemparaReg : out STD_LOGIC
+		OUT_WB_EscreveReg  : out STD_LOGIC;
+		OUT_WB_MemparaReg  : out STD_LOGIC;
+		OUT_WB_EscreveHILO : out STD_LOGIC
 	);
 end comp_regP4_MEM_WB;
 
 architecture arc of comp_regP4_MEM_WB is
-	signal reg_ula          : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
+	signal reg_ula          : STD_LOGIC_VECTOR(63 DOWNTO 0) := "0000000000000000000000000000000000000000000000000000000000000000";
 	signal reg_dado_leitura : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal reg_regEsc : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
 	
 	--registradores dos sinais de controle
 	--WB
-	signal reg_WB_EscreveReg : STD_LOGIC := '0';
-	signal reg_WB_MemparaReg : STD_LOGIC := '0';
+	signal reg_WB_EscreveReg  : STD_LOGIC := '0';
+	signal reg_WB_MemparaReg  : STD_LOGIC := '0';
+	signal reg_WB_EscreveHILO : STD_LOGIC := '0';
 begin
 	process(clk1)
 	begin
@@ -47,8 +50,9 @@ begin
 				reg_regEsc <= new_regEsc;
 				
 				--WB
-				reg_WB_EscreveReg <= new_WB_EscreveReg;
-				reg_WB_MemparaReg <= new_WB_MemparaReg;
+				reg_WB_EscreveReg  <= new_WB_EscreveReg;
+				reg_WB_MemparaReg  <= new_WB_MemparaReg;
+				reg_WB_EscreveHILO <= new_WB_EscreveHILO;
 			end if;
 		end if;
 		
@@ -59,8 +63,9 @@ begin
 				Q_regEsc <= reg_regEsc;
 				
 				--WB
-				OUT_WB_EscreveReg <= reg_WB_EscreveReg;
-				OUT_WB_MemparaReg <= reg_WB_MemparaReg;
+				OUT_WB_EscreveReg  <= reg_WB_EscreveReg;
+				OUT_WB_MemparaReg  <= reg_WB_MemparaReg;
+				OUT_WB_EscreveHILO <= reg_WB_EscreveHILO;
 			end if;
 		end if;
 	end process;

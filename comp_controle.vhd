@@ -16,8 +16,9 @@ ENTITY comp_controle IS
 		Q_LeMem      : out STD_LOGIC;
 		Q_EscreveMem : out STD_LOGIC;
 		--WB
-		Q_EscreveReg : out STD_LOGIC;
-		Q_MemparaReg : out STD_LOGIC
+		Q_EscreveReg  : out STD_LOGIC;
+		Q_MemparaReg  : out STD_LOGIC;
+		Q_EscreveHILO : out STD_LOGIC
 		--
 	);
 END comp_controle;
@@ -26,7 +27,7 @@ ARCHITECTURE behavior OF comp_controle IS
 BEGIN
 	process(OPCode)
 	begin
-		if    (OPCode = "000000")	then --R
+		if (OPCode = "000000" or OPCode = "000001")	then --R
 			--EX
 			Q_RegDst  <= '1';
 			Q_OpALU   <= "10";
@@ -37,8 +38,18 @@ BEGIN
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
 			--WB
-			Q_EscreveReg <= '1';
-			Q_MemparaReg <= '0';
+			Q_MemparaReg  <= '0';
+			
+			Q_EscreveReg  <= not OPCode(0);
+			Q_EscreveHILO <= OPCode(0);
+			
+--			if (OPCode = "000000") then
+--				Q_EscreveReg  <= '1';
+--				Q_EscreveHILO <= '0';
+--			else 
+--				Q_EscreveReg  <= '0';
+--				Q_EscreveHILO <= '1';
+--			end if;
 		elsif (OPCode = "100011") then --lw
 			--EX
 			Q_RegDst  <= '0';
@@ -50,8 +61,9 @@ BEGIN
 			Q_LeMem      <= '1';
 			Q_EscreveMem <= '0';
 			--WB
-			Q_EscreveReg <= '1';
-			Q_MemparaReg <= '1';
+			Q_EscreveReg  <= '1';
+			Q_MemparaReg  <= '1';
+			Q_EscreveHILO <= '0';
 		elsif (OPCode = "101011") then --sw
 			--EX
 			Q_OpALU   <= "00";
@@ -62,8 +74,9 @@ BEGIN
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '1';
 			--WB
-			Q_EscreveReg <= '0';
-			Q_MemparaReg <= '0';
+			Q_EscreveReg  <= '0';
+			Q_MemparaReg  <= '0';
+			Q_EscreveHILO <= '0';
 		elsif (OPCode = "000100") then --beq
 			--MEX
 			Q_OpALU   <= "01";
@@ -74,8 +87,9 @@ BEGIN
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
 			--WB
-			Q_EscreveReg <= '0';
-			Q_MemparaReg <= '0';
+			Q_EscreveReg  <= '0';
+			Q_MemparaReg  <= '0';
+			Q_EscreveHILO <= '0';
 		elsif (OPCode = "000010") then --beq
 			--MEX
 			Q_OpALU   <= "01";
@@ -86,8 +100,9 @@ BEGIN
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
 			--WB
-			Q_EscreveReg <= '0';
-			Q_MemparaReg <= '0';
+			Q_EscreveReg  <= '0';
+			Q_MemparaReg  <= '0';
+			Q_EscreveHILO <= '0';
 		end if;
 	end process;
 END behavior;

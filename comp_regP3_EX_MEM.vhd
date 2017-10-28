@@ -11,14 +11,14 @@ entity comp_regP3_EX_MEM is
 		new_zero   : in STD_LOGIC;
 		new_ula    : in STD_LOGIC_VECTOR(63 DOWNTO 0);
 		new_sum    : in STD_LOGIC_VECTOR(31 DOWNTO 0);
-		new_Jump    : in STD_LOGIC_VECTOR(31 DOWNTO 0);
+		new_Jump   : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_D2     : in STD_LOGIC_VECTOR(31 DOWNTO 0);
 		new_regEsc : in STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
 		Q_zero   : out STD_LOGIC;
 		Q_ula    : out STD_LOGIC_VECTOR(63 DOWNTO 0);
 		Q_sum    : out STD_LOGIC_VECTOR(31 DOWNTO 0);
-		Q_Jump    : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Q_Jump   : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_D2     : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 		Q_regEsc : out STD_LOGIC_VECTOR(4 DOWNTO 0);
 		
@@ -29,8 +29,9 @@ entity comp_regP3_EX_MEM is
 		new_MEM_LeMem      : in STD_LOGIC;
 		new_MEM_EscreveMem : in STD_LOGIC;
 		--WB
-		new_WB_EscreveReg : in STD_LOGIC;
-		new_WB_MemparaReg : in STD_LOGIC;
+		new_WB_EscreveReg  : in STD_LOGIC;
+		new_WB_MemparaReg  : in STD_LOGIC;
+		new_WB_EscreveHILO : in STD_LOGIC;
 		
 		--sinais de controle -- saida
 		--MEM
@@ -39,8 +40,9 @@ entity comp_regP3_EX_MEM is
 		OUT_MEM_LeMem      : out STD_LOGIC;
 		OUT_MEM_EscreveMem : out STD_LOGIC;
 		--WB
-		OUT_WB_EscreveReg : out STD_LOGIC;
-		OUT_WB_MemparaReg : out STD_LOGIC
+		OUT_WB_EscreveReg  : out STD_LOGIC;
+		OUT_WB_MemparaReg  : out STD_LOGIC;
+		OUT_WB_EscreveHILO : out STD_LOGIC
 	);
 end comp_regP3_EX_MEM;
 
@@ -59,8 +61,9 @@ architecture arc of comp_regP3_EX_MEM is
 	signal reg_MEM_LeMem      : STD_LOGIC := '0';
 	signal reg_MEM_EscreveMem : STD_LOGIC := '0';
 	--WB
-	signal reg_WB_EscreveReg : STD_LOGIC := '0';
-	signal reg_WB_MemparaReg : STD_LOGIC := '0';
+	signal reg_WB_EscreveReg  : STD_LOGIC := '0';
+	signal reg_WB_MemparaReg  : STD_LOGIC := '0';
+	signal reg_WB_EscreveHILO : STD_LOGIC := '0';
 begin	
 	process (clk1)
 	begin
@@ -79,8 +82,9 @@ begin
 				reg_MEM_LeMem      <= new_MEM_LeMem;
 				reg_MEM_EscreveMem <= new_MEM_EscreveMem;
 				--WB
-				reg_WB_EscreveReg <= new_WB_EscreveReg;
-				reg_WB_MemparaReg <= new_WB_MemparaReg;	
+				reg_WB_EscreveReg  <= new_WB_EscreveReg;
+				reg_WB_MemparaReg  <= new_WB_MemparaReg;
+				reg_WB_EscreveHILO <= new_WB_EscreveHILO;	
 			end if;
 		end if;
 		
@@ -99,8 +103,9 @@ begin
 				OUT_MEM_LeMem      <= reg_MEM_LeMem;
 				OUT_MEM_EscreveMem <= reg_MEM_EscreveMem;
 				--WB
-				OUT_WB_EscreveReg <= reg_WB_EscreveReg;
-				OUT_WB_MemparaReg <= reg_WB_MemparaReg;
+				OUT_WB_EscreveReg  <= reg_WB_EscreveReg;
+				OUT_WB_MemparaReg  <= reg_WB_MemparaReg;
+				OUT_WB_EscreveHILO <= reg_WB_EscreveHILO;
 			end if;
 		end if;
 	end process;
