@@ -30,6 +30,8 @@ entity comp_regP2_ID_EX is
 		new_EX_OrigALU : in STD_LOGIC;
 		new_EX_OrigCont :in STD_LOGIC;
 		new_EX_ContALU  : in STD_LOGIC_VECTOR(3 DOWNTO 0);
+		new_EX_LOorHI  : in STD_LOGIC;
+		new_EX_OrigOP1 : in STD_LOGIC;
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
 		new_MEM_Jump       : in STD_LOGIC;
@@ -46,6 +48,8 @@ entity comp_regP2_ID_EX is
 		OUT_EX_OrigALU : out STD_LOGIC;
 		OUT_EX_OrigCont : out STD_LOGIC;
 		OUT_EX_ContALU  : out STD_LOGIC_VECTOR(3 DOWNTO 0);
+		OUT_EX_LOorHI  : out STD_LOGIC;
+		OUT_EX_OrigOP1 : out STD_LOGIC;
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
 		OUT_MEM_Jump       : out STD_LOGIC;
@@ -74,6 +78,8 @@ architecture arc of comp_regP2_ID_EX is
 	signal reg_EX_OrigALU : STD_LOGIC := '0';
 	signal reg_EX_OrigCont :STD_LOGIC;
 	signal reg_EX_ContALU     : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal reg_EX_LOorHI  : STD_LOGIC;
+	signal reg_EX_OrigOP1 : STD_LOGIC;
 	--MEM
 	signal reg_MEM_Branch     : STD_LOGIC := '0';
 	signal reg_MEM_Jump       : STD_LOGIC := '0';
@@ -101,7 +107,9 @@ begin
 				reg_EX_OpALU   <= new_EX_OpALU;
 				reg_EX_OrigALU <= new_EX_OrigALU;
 				reg_EX_OrigCont <= new_EX_OrigCont;
-				reg_EX_ContALU <= new_EX_ContALU;
+				reg_EX_ContALU <= new_EX_ContALU;				
+				reg_EX_LOorHI  <= new_EX_LOorHI;
+				reg_EX_OrigOP1 <= new_EX_OrigOP1;
 				--MEM
 				reg_MEM_Jump       <= new_MEM_Jump;
 				reg_MEM_Branch     <= new_MEM_Branch;
@@ -130,6 +138,8 @@ begin
 				OUT_EX_OrigALU <= reg_EX_OrigALU;
 				OUT_EX_OrigCont <= reg_EX_OrigCont;
 				OUT_EX_ContALU  <= reg_EX_ContALU;
+				OUT_EX_LOorHI   <= reg_EX_LOorHI;
+				OUT_EX_OrigOP1  <= reg_EX_OrigOP1;
 				--MEM
 				OUT_MEM_Branch     <= reg_MEM_Branch;
 				OUT_MEM_Jump       <= reg_MEM_Jump;

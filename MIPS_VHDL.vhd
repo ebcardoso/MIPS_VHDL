@@ -136,12 +136,17 @@ COMPONENT comp_controle IS
 		OPCode    : in STD_LOGIC_VECTOR(5 downto 0);
 	
 		--sinais de controle saida
+		--ID
+		Q_readHI : out STD_LOGIC;
+		Q_readLO : out STD_LOGIC;
 		--EX
 		Q_RegDst  : out STD_LOGIC;
 		Q_OpALU   : out STD_LOGIC_VECTOR(1 DOWNTO 0);
 		Q_OrigALU : out STD_LOGIC;
 		Q_OrigCont : out STD_LOGIC;
 		Q_ContALU : out STD_LOGIC_VECTOR(3 DOWNTO 0);
+		Q_LOorHI  : out STD_LOGIC;
+		Q_origOP1 : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
 		Q_Jump		 : out STD_LOGIC;
@@ -221,6 +226,8 @@ COMPONENT comp_regP2_ID_EX is
 		new_EX_OrigALU : in STD_LOGIC;
 		new_EX_OrigCont : in STD_LOGIC;
 		new_EX_ContALU  : in STD_LOGIC_VECTOR(3 DOWNTO 0);
+		new_EX_LOorHI  : in STD_LOGIC;
+		new_EX_OrigOP1 : in STD_LOGIC;
 		--MEM
 		new_MEM_Branch     : in STD_LOGIC;
 		new_MEM_Jump       : in STD_LOGIC;
@@ -237,6 +244,8 @@ COMPONENT comp_regP2_ID_EX is
 		OUT_EX_OrigALU : out STD_LOGIC;
 		OUT_EX_OrigCont : out STD_LOGIC;
 		OUT_EX_ContALU  : out STD_LOGIC_VECTOR(3 DOWNTO 0);
+		OUT_EX_LOorHI  : out STD_LOGIC;
+		OUT_EX_OrigOP1 : out STD_LOGIC;
 		--MEM
 		OUT_MEM_Branch     : out STD_LOGIC;
 		OUT_MEM_Jump       : out STD_LOGIC;
@@ -449,11 +458,15 @@ END COMPONENT;
 	signal aux_allow_W_PC : STD_LOGIC;
 	
 	-- Estagio 2: Decodificacao da Instrucao
+	signal aux_ctrl_ID_readHI : STD_LOGIC;
+	signal aux_ctrl_ID_readLO : STD_LOGIC;
 	signal aux_ctrl_EX_RegDst  : STD_LOGIC;
 	signal aux_ctrl_EX_OpALU   : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	signal aux_ctrl_EX_OrigALU : STD_LOGIC;
-	signal aux_ctrl_EX_OrigCont : STD_LOGIC;
+	signal aux_ctrl_EX_OrigCont :STD_LOGIC;
 	signal aux_ctrl_EX_ContALU     : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal aux_ctrl_EX_LOorHI  : STD_LOGIC;
+	signal aux_ctrl_EX_OrigOP1 : STD_LOGIC;
 	signal aux_ctrl_MEM_Branch     : STD_LOGIC;
 	signal aux_ctrl_MEM_Jump       : STD_LOGIC;
 	signal aux_ctrl_MEM_LeMem      : STD_LOGIC;
@@ -479,6 +492,8 @@ END COMPONENT;
 	signal aux_R2_EX_OrigALU : STD_LOGIC;
 	signal aux_R2_EX_OrigCont : STD_LOGIC;
 	signal aux_R2_EX_ContALU     : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal aux_R2_EX_LOorHI  : STD_LOGIC;
+	signal aux_R2_EX_OrigOP1 : STD_LOGIC;
 	signal aux_R2_MEM_Branch     : STD_LOGIC;
 	signal aux_R2_MEM_Jump       : STD_LOGIC;
 	signal aux_R2_MEM_LeMem      : STD_LOGIC;
@@ -498,6 +513,8 @@ END COMPONENT;
 	signal aux_mux_ula_op2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_ctrlUla_out : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0000"; --
 	signal aux_ctrlUla_out2 : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0000"; --
+	signal aux_mux_LOorHI: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal aux_mux_OP1: STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_shift2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal aux_desvio : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
@@ -572,8 +589,8 @@ BEGIN
 	
 	com_controle : comp_controle port map (
 		aux_MI_out(31 DOWNTO 26),
-		
-		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU,
+		aux_ctrl_ID_readHI, aux_ctrl_ID_readLO,
+		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU, aux_ctrl_EX_LOorHI, aux_ctrl_EX_OrigOP1,
 		aux_ctrl_MEM_Branch, aux_ctrl_MEM_Jump, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg, aux_ctrl_WB_EscreveHILO
 	);
@@ -583,13 +600,13 @@ BEGIN
 	whl <= aux_R4_WB_EscreveHILO;
 	com_HI : comp_registerHILO port map (
 		clk,
-		'1', aux_R4_WB_EscreveHILO,
+		aux_ctrl_ID_readHI, aux_R4_WB_EscreveHILO,
 		aux_mux_data_registrador(63 DOWNTO 32), aux_hi
 	);
 	
 	com_LO : comp_registerHILO port map (
 		clk,
-		'1', aux_R4_WB_EscreveHILO,
+		aux_ctrl_ID_readLO, aux_R4_WB_EscreveHILO,
 		aux_mux_data_registrador(31 DOWNTO 0) , aux_lo
 	);
 	hi <= aux_hi;
@@ -614,11 +631,11 @@ BEGIN
 		aux_R2_PC, aux_R2_Jump, aux_R2_D1, aux_R2_D2, aux_R2_EXT,
 		aux_R2_regEscRT, aux_R2_regEscRD,
 		
-		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU,
+		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU, aux_ctrl_EX_LOorHI, aux_ctrl_EX_OrigOP1,
 		aux_ctrl_MEM_Branch, aux_ctrl_MEM_Jump, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg, aux_ctrl_WB_EscreveHILO,
 		
-		aux_R2_EX_RegDst, aux_R2_EX_OpALU, aux_R2_EX_OrigALU, aux_R2_EX_OrigCont, aux_ctrl_EX_ContALU,
+		aux_R2_EX_RegDst, aux_R2_EX_OpALU, aux_R2_EX_OrigALU, aux_R2_EX_OrigCont, aux_R2_EX_ContALU, aux_R2_EX_LOorHI, aux_R2_EX_OrigOP1,
 		aux_R2_MEM_Branch, aux_R2_MEM_Jump, aux_R2_MEM_LeMem, aux_R2_MEM_EscreveMem,
 		aux_R2_WB_EscreveReg, aux_R2_WB_MemparaReg, aux_R2_WB_EscreveHILO
 	);
@@ -632,8 +649,11 @@ BEGIN
 	com_ula_ctrl : comp_ULA_Controle port map (aux_R2_EX_OpALU, aux_R2_EXT(5 DOWNTO 0), aux_ctrlUla_out);
 	
 	com_mux_CRTL : comp_mux2_4bits port map (aux_ctrlUla_out, aux_R2_EX_ContALU, aux_R2_EX_OrigCont, aux_ctrlUla_out2);
+
+	com_LOorHI : comp_mux2_32bits port map (aux_lo, aux_hi, aux_R2_EX_LOorHI, aux_mux_LOorHI);
+	com_OP1    : comp_mux2_32bits port map (aux_reg_out1, aux_mux_LOorHI, aux_R2_EX_OrigOP1, aux_mux_OP1);
 	
-	com_ula : comp_ULA port map (aux_ctrlUla_out2, aux_reg_out1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
+	com_ula : comp_ULA port map (aux_ctrlUla_out2, aux_mux_OP1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
 
 	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_mux_regDest);
 	

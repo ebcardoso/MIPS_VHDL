@@ -20,7 +20,7 @@ END comp_registradores;
 
 ARCHITECTURE behavior OF comp_registradores IS
 																									
-	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
 	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000001001101";
 	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0);

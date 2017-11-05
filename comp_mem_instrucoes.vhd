@@ -12,15 +12,15 @@ END comp_mem_instrucoes;
 
 ARCHITECTURE behavior OF comp_mem_instrucoes IS
 
-	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00110" & "01001" & "11000" & "00000" & "100000"; -- add 22
+	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000001" & "01001" & "00110" & "00000" & "00000" & "100001"; -- mult 120
 	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "10001" & "10000" & "10010" & "00000" & "100101"; -- or  8191
 	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11111" & "00001" & "00010" & "00000" & "100100"; -- and 69
 	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11011" & "01110" & "00000" & "100010"; -- sub 21
-	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "010000" & "11000" & "10010" & "0000000000100000"; --addi 54
+	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "100000" & "00000" & "11000" & "00000" & "00000" & "100000"; -- rflo $24
 	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "101011" & "01011" & "00110" & "0000000000000100"; --sw r24, 4(r11) -- sw 22, 4(12)
-	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11100" & "11101" & "10011" & "00000" & "100010"; -- sub 7
+	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "010000" & "11000" & "10010" & "0000000000100000"; -- subi 7
 	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11101" & "11110" & "01110" & "00000" & "100100"; -- and 40
-	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11000" & "00000" & "00000" & "100101"; -- or  62
+	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11000" & "00010" & "00000" & "100101"; -- or  62
 	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00001" & "11000" & "10011" & "00000" & "100000"; -- add 55
 	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "100011" & "01011" & "10010" & "0000000000000100"; --lw r18, 4(r11) -- lw 22, 8(16)
 

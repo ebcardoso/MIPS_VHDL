@@ -6,12 +6,17 @@ ENTITY comp_controle IS
 		OPCode    : in STD_LOGIC_VECTOR(5 downto 0);
 	
 		--sinais de controle saida
+		--ID
+		Q_readHI : out STD_LOGIC;
+		Q_readLO : out STD_LOGIC;
 		--EX
 		Q_RegDst  : out STD_LOGIC;
 		Q_OpALU   : out STD_LOGIC_VECTOR(1 DOWNTO 0);
 		Q_OrigALU : out STD_LOGIC;
 		Q_OrigCont: out STD_LOGIC;
 		Q_ContALU : out STD_LOGIC_VECTOR(3 DOWNTO 0);
+		Q_LOorHI  : out STD_LOGIC;
+		Q_OrigOP1 : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
 		Q_Jump		 : out STD_LOGIC;
@@ -54,6 +59,7 @@ BEGIN
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
+			Q_origOP1    <= '0';
 			--WB
 			Q_MemparaReg  <= '0';
 			
@@ -67,6 +73,7 @@ BEGIN
 			Q_OpALU   <= "10";
 			Q_OrigALU  <= '1'; --imediato ou registrador
 			Q_OrigCont <= '1'; --do controle da ula ou do geral
+			Q_OrigOP1    <= '0';
 			--MEM
 			Q_Branch     <= '0';
 			Q_Jump       <= '0';
@@ -76,7 +83,25 @@ BEGIN
 			Q_MemparaReg  <= '0';
 			
 			Q_EscreveReg  <= not OPCode(0);
-			Q_EscreveHILO <= OPCode(0);			 
+			Q_EscreveHILO <= OPCode(0);
+		elsif (OPCode = "100000") then --rflo
+			--ID
+			Q_readLO <= '1';
+			--EX
+			Q_RegDst  <= '0';
+			Q_OpALU   <= "10";
+			Q_OrigALU  <= '0'; --imediato ou registrador
+			Q_OrigCont <= '0'; --do controle da ula ou do geral
+			--MEM
+			Q_Branch     <= '0';
+			Q_Jump       <= '0';
+			Q_LeMem      <= '0';
+			Q_EscreveMem <= '0';
+			Q_origOP1    <= '1';
+			--WB
+			Q_MemparaReg <= '0';
+			Q_EscreveReg <= '1';
+			Q_EscreveHILO <= '0';
 		elsif (OPCode = "100011") then --lw
 			--EX
 			Q_RegDst  <= '0';
@@ -88,6 +113,7 @@ BEGIN
 			Q_Jump       <= '0';
 			Q_LeMem      <= '1';
 			Q_EscreveMem <= '0';
+			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '1';
 			Q_MemparaReg  <= '1';
@@ -102,6 +128,7 @@ BEGIN
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '1';
+			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
 			Q_MemparaReg  <= '0';
@@ -116,6 +143,7 @@ BEGIN
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
+			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
 			Q_MemparaReg  <= '0';
@@ -130,6 +158,7 @@ BEGIN
 			Q_Jump       <= '1';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
+			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
 			Q_MemparaReg  <= '0';
