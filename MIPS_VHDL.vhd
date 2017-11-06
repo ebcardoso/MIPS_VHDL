@@ -28,18 +28,18 @@ ENTITY mips_vhdl IS
 		
 		state : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		writ_reg : OUT STD_LOGIC;
-		whl     : OUT STD_LOGIC;
+		write_hi_lo : OUT STD_LOGIC;
 		writ_md : OUT STD_LOGIC;
-		read_md : OUT STD_LOGIC;
+		read_md : OUT STD_LOGIC--;
 		
-		wb1 : OUT STD_LOGIC;
-		rb1 : OUT STD_LOGIC;
-		wb2 : OUT STD_LOGIC;
-		rb2 : OUT STD_LOGIC;
-		wb3 : OUT STD_LOGIC;
-		rb3 : OUT STD_LOGIC;
-		wb4 : OUT STD_LOGIC;
-		rb4 : OUT STD_LOGIC
+--		wb1 : OUT STD_LOGIC;
+--		rb1 : OUT STD_LOGIC;
+--		wb2 : OUT STD_LOGIC;
+--		rb2 : OUT STD_LOGIC;
+--		wb3 : OUT STD_LOGIC;
+--		rb3 : OUT STD_LOGIC;
+--		wb4 : OUT STD_LOGIC;
+--		rb4 : OUT STD_LOGIC
 		
 		--jump    : OUT STD_LOGIC;
 		--branch  : OUT STD_LOGIC
@@ -597,7 +597,7 @@ BEGIN
 	
 	com_extSin : comp_ext_sinal port map (aux_MI_out(15 DOWNTO 0), aux_extSin);
 	
-	whl <= aux_R4_WB_EscreveHILO;
+	write_hi_lo <= aux_R4_WB_EscreveHILO;
 	com_HI : comp_registerHILO port map (
 		clk,
 		aux_ctrl_ID_readHI, aux_R4_WB_EscreveHILO,
@@ -641,7 +641,7 @@ BEGIN
 	);
 	
 	funcc <= aux_R2_EXT(5 DOWNTO 0); --para teste
-	dados11 <= aux_reg_out1; --para teste
+	
 	opUla <= aux_R2_EX_OpALU;   --para teste
 	
 	com_mux_op2_ula : comp_mux2_32bits port map (aux_reg_out2, aux_R2_EXT, aux_R2_EX_OrigALU, aux_mux_ula_op2);
@@ -653,6 +653,7 @@ BEGIN
 	com_LOorHI : comp_mux2_32bits port map (aux_lo, aux_hi, aux_R2_EX_LOorHI, aux_mux_LOorHI);
 	com_OP1    : comp_mux2_32bits port map (aux_reg_out1, aux_mux_LOorHI, aux_R2_EX_OrigOP1, aux_mux_OP1);
 	
+	dados11 <= aux_mux_OP1; --para teste
 	com_ula : comp_ULA port map (aux_ctrlUla_out2, aux_mux_OP1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);
 
 	com_mux_regDest : comp_mux2_5bits port map (aux_R2_regEscRT, aux_R2_regEscRD, aux_R2_EX_RegDst, aux_mux_regDest);

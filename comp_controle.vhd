@@ -45,7 +45,17 @@ BEGIN
 		elsif (OPCode = "010100") then --andi
 			Q_ContALU <= "0000";
 		elsif (OPCode = "010110") then --ori
-			Q_ContALU <= "0001";
+			Q_ContALU <= "0001";		
+		elsif (OPCode = "100000") then --rflo
+			Q_ContALU <= "0010";
+			Q_readLO <= '1';
+			Q_readHI <= '0';
+			Q_LOorHI <= '0';
+		elsif (OPCode = "100001") then --rfhi
+			Q_ContALU <= "0010";
+			Q_readLO <= '0';
+			Q_readHI <= '1';
+			Q_LOorHI <= '1';
 		end if;
 	
 		if (OPCode = "000000" or OPCode = "000001") then --R
@@ -84,23 +94,21 @@ BEGIN
 			
 			Q_EscreveReg  <= not OPCode(0);
 			Q_EscreveHILO <= OPCode(0);
-		elsif (OPCode = "100000") then --rflo
-			--ID
-			Q_readLO <= '1';
+		elsif (OPCode = "100000" or OPCode = "100001") then --rflo
 			--EX
 			Q_RegDst  <= '0';
 			Q_OpALU   <= "10";
-			Q_OrigALU  <= '0'; --imediato ou registrador
-			Q_OrigCont <= '0'; --do controle da ula ou do geral
+			Q_OrigALU  <= '1'; --imediato ou registrador
+			Q_OrigCont <= '1'; --do controle da ula ou do geral
+			Q_origOP1    <= '1';
 			--MEM
 			Q_Branch     <= '0';
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
-			Q_origOP1    <= '1';
 			--WB
-			Q_MemparaReg <= '0';
 			Q_EscreveReg <= '1';
+			Q_MemparaReg <= '0';
 			Q_EscreveHILO <= '0';
 		elsif (OPCode = "100011") then --lw
 			--EX
@@ -108,12 +116,12 @@ BEGIN
 			Q_OpALU   <= "00";
 			Q_OrigALU <= '1';
 			Q_OrigCont <= '0';
+			Q_origOP1    <= '0';
 			--MEM
 			Q_Branch     <= '0';
 			Q_Jump       <= '0';
 			Q_LeMem      <= '1';
 			Q_EscreveMem <= '0';
-			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '1';
 			Q_MemparaReg  <= '1';
@@ -123,31 +131,27 @@ BEGIN
 			Q_OpALU   <= "00";
 			Q_OrigALU <= '1';
 			Q_OrigCont <= '0';
+			Q_origOP1    <= '0';
 			--MEM
 			Q_Branch     <= '0';
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '1';
-			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
-			Q_MemparaReg  <= '0';
-			Q_EscreveHILO <= '0';
 		elsif (OPCode = "000100") then --beq
 			--MEX
 			Q_OpALU   <= "01";
 			Q_OrigALU <= '0';
 			Q_OrigCont <= '0';
+			Q_origOP1    <= '0';
 			--MEM
 			Q_Branch     <= '1';
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
-			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
-			Q_MemparaReg  <= '0';
-			Q_EscreveHILO <= '0';
 		elsif (OPCode = "000010") then --jump
 			--MEX
 --			Q_OpALU   <= "01";
@@ -158,11 +162,9 @@ BEGIN
 			Q_Jump       <= '1';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
-			Q_origOP1    <= '0';
+--			Q_origOP1    <= '0';
 			--WB
 			Q_EscreveReg  <= '0';
-			Q_MemparaReg  <= '0';
-			Q_EscreveHILO <= '0';
 		end if;
 	end process;
 END behavior;
