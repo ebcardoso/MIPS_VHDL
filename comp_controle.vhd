@@ -15,7 +15,7 @@ ENTITY comp_controle IS
 		Q_OrigALU : out STD_LOGIC;
 		Q_OrigCont: out STD_LOGIC;
 		Q_ContALU : out STD_LOGIC_VECTOR(3 DOWNTO 0);
-		Q_LOorHI  : out STD_LOGIC;
+		--Q_LOorHI  : out STD_LOGIC;
 		Q_OrigOP1 : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
@@ -50,12 +50,12 @@ BEGIN
 			Q_ContALU <= "0010";
 			Q_readLO <= '1';
 			Q_readHI <= '0';
-			Q_LOorHI <= '0';
-		elsif (OPCode = "100001") then --rfhi
-			Q_ContALU <= "0010";
-			Q_readLO <= '0';
-			Q_readHI <= '1';
-			Q_LOorHI <= '1';
+			--Q_LOorHI <= '0';
+--		elsif (OPCode = "100001") then --rfhi
+--			Q_ContALU <= "0010";
+--			Q_readLO <= '0';
+--			Q_readHI <= '1';
+			--Q_LOorHI <= '1';
 		end if;
 	
 		if (OPCode = "000000" or OPCode = "000001") then --R
@@ -64,12 +64,12 @@ BEGIN
 			Q_OpALU   <= "10";
 			Q_OrigALU <= '0'; --imediato ou registrador
 			Q_OrigCont <= '0'; --do controle da ula ou do geral
+			Q_OrigOP1    <= '0';
 			--MEM
 			Q_Branch     <= '0';
 			Q_Jump       <= '0';
 			Q_LeMem      <= '0';
 			Q_EscreveMem <= '0';
-			Q_origOP1    <= '0';
 			--WB
 			Q_MemparaReg  <= '0';
 			
@@ -94,7 +94,7 @@ BEGIN
 			
 			Q_EscreveReg  <= not OPCode(0);
 			Q_EscreveHILO <= OPCode(0);
-		elsif (OPCode = "100000" or OPCode = "100001") then --rflo
+		elsif (OPCode = "100000") then --rflo
 			--EX
 			Q_RegDst  <= '0';
 			Q_OpALU   <= "10";

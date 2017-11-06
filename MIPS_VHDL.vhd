@@ -145,7 +145,7 @@ COMPONENT comp_controle IS
 		Q_OrigALU : out STD_LOGIC;
 		Q_OrigCont : out STD_LOGIC;
 		Q_ContALU : out STD_LOGIC_VECTOR(3 DOWNTO 0);
-		Q_LOorHI  : out STD_LOGIC;
+		--Q_LOorHI  : out STD_LOGIC;
 		Q_origOP1 : out STD_LOGIC;
 		--MEM
 		Q_Branch     : out STD_LOGIC;
@@ -590,7 +590,7 @@ BEGIN
 	com_controle : comp_controle port map (
 		aux_MI_out(31 DOWNTO 26),
 		aux_ctrl_ID_readHI, aux_ctrl_ID_readLO,
-		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU, aux_ctrl_EX_LOorHI, aux_ctrl_EX_OrigOP1,
+		aux_ctrl_EX_RegDst, aux_ctrl_EX_OpALU, aux_ctrl_EX_OrigALU, aux_ctrl_EX_OrigCont, aux_ctrl_EX_ContALU, aux_ctrl_EX_OrigOP1,--aux_ctrl_EX_LOorHI, aux_ctrl_EX_OrigOP1,
 		aux_ctrl_MEM_Branch, aux_ctrl_MEM_Jump, aux_ctrl_MEM_LeMem, aux_ctrl_MEM_EscreveMem,
 		aux_ctrl_WB_EscreveReg, aux_ctrl_WB_MemparaReg, aux_ctrl_WB_EscreveHILO
 	);
@@ -650,8 +650,8 @@ BEGIN
 	
 	com_mux_CRTL : comp_mux2_4bits port map (aux_ctrlUla_out, aux_R2_EX_ContALU, aux_R2_EX_OrigCont, aux_ctrlUla_out2);
 
-	com_LOorHI : comp_mux2_32bits port map (aux_lo, aux_hi, aux_R2_EX_LOorHI, aux_mux_LOorHI);
-	com_OP1    : comp_mux2_32bits port map (aux_reg_out1, aux_mux_LOorHI, aux_R2_EX_OrigOP1, aux_mux_OP1);
+	--com_LOorHI : comp_mux2_32bits port map (aux_lo, aux_hi, aux_R2_EX_LOorHI, aux_mux_LOorHI);
+	com_OP1    : comp_mux2_32bits port map (aux_reg_out1, aux_lo, aux_R2_EX_OrigOP1, aux_mux_OP1);
 	
 	dados11 <= aux_mux_OP1; --para teste
 	com_ula : comp_ULA port map (aux_ctrlUla_out2, aux_mux_OP1, aux_mux_ula_op2, aux_ula_out, aux_ula_zero);

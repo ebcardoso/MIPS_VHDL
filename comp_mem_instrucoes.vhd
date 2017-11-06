@@ -19,7 +19,7 @@ ARCHITECTURE behavior OF comp_mem_instrucoes IS
 	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "100000" & "00000" & "11000" & "0000000000000000"; -- rflo $24
 	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "101011" & "01011" & "00110" & "0000000000000100"; --sw r24, 4(r11) -- sw 22, 4(12)
 	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "010000" & "11000" & "10010" & "0000000000100000"; -- subi 7
-	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "100001" & "00000" & "11000" & "0000000000000000"; -- rfhi $24
+	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "010000" & "11000" & "10010" & "0000000000100000"; -- subi 7
 	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "11110" & "11000" & "00010" & "00000" & "100101"; -- or  62
 	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "000000" & "00001" & "11000" & "10011" & "00000" & "100000"; -- add 55
 	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "100011" & "01011" & "10010" & "0000000000000100"; --lw r18, 4(r11) -- lw 22, 8(16)
