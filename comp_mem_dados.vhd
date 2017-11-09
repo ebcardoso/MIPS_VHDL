@@ -9,12 +9,18 @@ entity comp_mem_dados is
     );
     port (
         a_clock  : in std_logic;
-		  
         a_wren   : in std_logic;
         a_read   : in std_logic;
         a_addr   : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
         a_data_i : in std_logic_vector(DATA_WIDTH - 1 downto 0);
-        a_data_o : out std_logic_vector(DATA_WIDTH - 1 downto 0)
+        a_data_o : out std_logic_vector(DATA_WIDTH - 1 downto 0);
+
+        b_clock  : in std_logic;
+        b_wren   : in std_logic;
+        b_read   : in std_logic;
+        b_addr   : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
+        b_data_i : in std_logic_vector(DATA_WIDTH - 1 downto 0);
+        b_data_o : out std_logic_vector(DATA_WIDTH - 1 downto 0)
     );
 end comp_mem_dados;
 
@@ -27,16 +33,33 @@ begin
     -- Port A
     process (a_clock)
     begin
-        if (a_clock = '1' and a_clock'event) then
-            if (a_wren = '1') then
+        if a_clock'event and a_clock = '1' then
+            if a_wren = '1' then
                 bram(to_integer(unsigned(a_addr))) := a_data_i;
             end if;
         end if;
 		  
-        if (a_clock = '0' and a_clock'event) then
-            if (a_read = '1') then
+        if a_clock'event and a_clock = '0' then
+            if a_read = '1' then
 					a_data_o <= bram(to_integer(unsigned(a_addr)));
             end if;
         end if;
     end process;
+     
+    -- Port B
+    process (b_clock)
+    begin
+        if b_clock'event and b_clock = '1' then
+            if b_wren = '1' then
+                bram(to_integer(unsigned(b_addr))) := b_data_i;
+            end if;
+        end if;
+		  
+        if b_clock'event and b_clock = '0' then
+            if b_read = '1' then
+					b_data_o <= bram(to_integer(unsigned(b_addr)));
+            end if;
+        end if;
+    end process;
+
 end behavior;

@@ -14,25 +14,25 @@ ENTITY comp_registradores IS
 		dados1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		dados2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
-		s1, s2, s3, s4 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)--, s3, s4, s5, s6, s7 
+		s1, s2, s3, s4 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END comp_registradores;
 
 ARCHITECTURE behavior OF comp_registradores IS
 																									
 	signal r0  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000000";
-	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r1  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000001101";
+	signal r2  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000011001";
 	signal r3  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r4  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r5  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r6  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r7  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r8  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000001";
-	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000010";
-	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000011";
-	signal r12 : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000000000000100";
+	signal r9  : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r10 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r11 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal r12 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r13 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r14 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal r15 : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -59,8 +59,9 @@ BEGIN
 			if (clk = '0' and clk'event) then
 				s1 <= r1;
 				s2 <= r2;
-				s3 <= r3;
-				s4 <= r4;
+				s3 <= r18;
+				s4 <= r24;
+			
 				   if(regLeitura1 = "00000") then
 					dados1 <= r0;
 				elsif(regLeitura1 = "00001") then
