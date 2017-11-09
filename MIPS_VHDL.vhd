@@ -16,8 +16,10 @@ ENTITY mips_vhdl IS
 		ulaRes    : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		--ulaResR3 : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
-		r24 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		r18 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r3 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		r4 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		hi  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		lo  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 --		r02 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -181,7 +183,7 @@ COMPONENT comp_registradores IS
 		dados1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		dados2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
-		s1, s2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		s1, s2, s3, s4 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -395,7 +397,7 @@ END COMPONENT;
 COMPONENT comp_mem_dados IS
     generic (
         DATA_WIDTH : integer := 32;
-        ADDR_WIDTH : integer := 32 -- 2 ^ ADDR_WIDTH addresses
+        ADDR_WIDTH : integer := 8 -- 2 ^ ADDR_WIDTH addresses
     );
     port (
         a_clock  : in std_logic;
@@ -617,7 +619,7 @@ BEGIN
 		clk,
 		aux_R4_WB_EscreveReg,--'0',
 		aux_MI_out(25 DOWNTO 21), aux_MI_out(20 DOWNTO 16), aux_R4_regEsc,
-		aux_mux_data_registrador(31 downto 0), aux_reg_out1, aux_reg_out2, r24, r18--, r02, r14, r01, r00, r19
+		aux_mux_data_registrador(31 downto 0), aux_reg_out1, aux_reg_out2, r1, r2, r3, r4
 	);
 	
 	-- Estagio 3: Execucao
@@ -685,7 +687,7 @@ BEGIN
 	com_mem_dados : comp_mem_dados port map (
 		clk,
 		aux_R3_MEM_EscreveMem, aux_R3_MEM_LeMem,
-		aux_R3_ula(31 DOWNTO 0), aux_R3_D2, aux_memDados_out
+		aux_R3_ula(7 DOWNTO 0), aux_R3_D2, aux_memDados_out
 	);
 	
 	-- Estagio 5: Salvar Dados
