@@ -12,5 +12,5 @@ end comp_somadorPC;
 
 architecture arc of comp_somadorPC is
 begin
-	res <= PC + "00000000000000000000000000000001";
+	res <= PC + "00000000000000000000000000000100";
 end arc;
