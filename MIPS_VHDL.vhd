@@ -7,9 +7,9 @@ entity mips_vhdl IS
 		
 		oC1_pc_out : out STD_LOGIC_VECTOR(31 downto 0);
 		oC1_inst_out : out STD_LOGIC_VECTOR(31 downto 0);
-		oC1_r1 : out STD_LOGIC_VECTOR(31 downto 0);
-		oC1_r2 : out STD_LOGIC_VECTOR(31 downto 0);
-		oC1_r18 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC1_r21 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC1_r22 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC1_r23 : out STD_LOGIC_VECTOR(31 downto 0);
 		oC1_r24 : out STD_LOGIC_VECTOR(31 downto 0);
 		oC1_WriteMEM : out STD_LOGIC;
 		oC1_DataAddr : out STD_LOGIC_VECTOR(7 downto 0);
@@ -17,9 +17,9 @@ entity mips_vhdl IS
 
 		oC2_pc_out : out STD_LOGIC_VECTOR(31 downto 0);
 		oC2_inst_out : out STD_LOGIC_VECTOR(31 downto 0);
-		oC2_r1 : out STD_LOGIC_VECTOR(31 downto 0);
-		oC2_r2 : out STD_LOGIC_VECTOR(31 downto 0);
-		oC2_r18 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC2_r21 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC2_r22 : out STD_LOGIC_VECTOR(31 downto 0);
+		oC2_r23 : out STD_LOGIC_VECTOR(31 downto 0);
 		oC2_r24 : out STD_LOGIC_VECTOR(31 downto 0);
 		oC2_ReadMEM : out STD_LOGIC;
 		oC2_DataAddr : out STD_LOGIC_VECTOR(7 downto 0);
@@ -124,7 +124,7 @@ END COMPONENT;
 begin
 	core1 : CORE port map (
 		clk,
-		C1_pc_out, C1_ULA1, C1_ULA2, C1_ulaRes, C1_wr, oC1_r1, oC1_r2, oC1_r18, oC1_r24,
+		C1_pc_out, C1_ULA1, C1_ULA2, C1_ulaRes, C1_wr, oC1_r21, oC1_r22, oC1_r23, oC1_r24,
 		C1_R3_DadosOut,
 		C1_R3_MEM_LeMem, C1_R3_MEM_EscreveMem, C1_R3_MEM_ULA, C1_R3_MEM_D2,
 		C1_inst
@@ -132,11 +132,14 @@ begin
 		
 	core2 : CORE port map (
 		clk, 
-		C2_pc_out, C2_ULA1, C2_ULA2, C2_ulaRes, C2_wr, oC2_r1, oC2_r2, oC2_r18, oC2_r24,
+		C2_pc_out, C2_ULA1, C2_ULA2, C2_ulaRes, C2_wr, oC2_r21, oC2_r22, oC2_r23, oC2_r24,
 		C2_R3_DadosOut,
 		C2_R3_MEM_LeMem, C2_R3_MEM_EscreveMem, C2_R3_MEM_ULA, C2_R3_MEM_D2,
 		C2_inst
 	);
+	
+	oC1_pc_out <= C1_pc_out;
+	oC2_pc_out <= C2_pc_out;
 	
 	com_MI1 : comp_mem_instrucoes1 port map (clk, C1_pc_out, C1_inst);
 	com_MI2 : comp_mem_instrucoes2 port map (clk, C2_pc_out, C2_inst);
