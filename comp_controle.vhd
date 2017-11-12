@@ -46,7 +46,7 @@ BEGIN
 			Q_ContALU <= "0000";
 		elsif (OPCode = "010110") then --ori
 			Q_ContALU <= "0001";		
-		elsif (OPCode = "100000") then --rflo
+		elsif (OPCode = "100000") then --mflo
 			Q_ContALU <= "0010";
 			Q_readLO <= '1';
 			Q_readHI <= '0';

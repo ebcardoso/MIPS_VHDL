@@ -8,7 +8,8 @@ ENTITY comp_registerHILO IS
 		allow_write : IN STD_LOGIC;
 		
 		new_value  : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-		exit_value : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		exit_value : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		aux  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END comp_registerHILO;
 
@@ -29,4 +30,5 @@ BEGIN
 			end if;
 		end if;
 	end process;
+	aux <= reg_value;
 END behavior;
